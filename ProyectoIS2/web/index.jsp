@@ -36,7 +36,7 @@
         </form>
         <!-- form -->
         <div class="button">
-            <a href="#">Download source file</a>
+            <a href="#">Download source file .</a>
         </div>
         <!-- button -->
     </section>
