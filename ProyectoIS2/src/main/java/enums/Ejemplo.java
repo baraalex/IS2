@@ -8,5 +8,6 @@ package enums;
  * To change this template use File | Settings | File Templates.
  */
 public enum Ejemplo {
-    EJEMPLO
+    LOGIN,
+    REGISTRO
 }

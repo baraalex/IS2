@@ -8,11 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 
-<%
-    System.out.println(request.getParameter("username"));
-    System.out.println(request.getParameter("password"));
-%>
-
 <HTML>
 
 <HEAD>
@@ -26,8 +21,6 @@
 </HEAD>
 
 <BODY>
-
-<!-- Aqui va todo lo chachi -->
 
 <H1>Otro t&iacute;tulo, esta vez m&aacute;s largo. </H1>
 

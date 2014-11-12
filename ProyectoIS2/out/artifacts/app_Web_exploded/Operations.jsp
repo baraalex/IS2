@@ -8,11 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 
-<%
-    System.out.println(request.getParameter("username"));
-    System.out.println(request.getParameter("password"));
-%>
-
 <HTML>
 
 <HEAD>

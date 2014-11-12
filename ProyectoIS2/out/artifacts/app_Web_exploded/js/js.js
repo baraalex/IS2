@@ -6,15 +6,28 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function login(){
-//    document.post("Otro.jsp", { name: "John", time: "2pm" },
-//        function(data){
-//            alert("Data Loaded: " + data);
-//        })
-    $.post("Otro.jsp", { name: "EJEMPLO", time: "2pm" },
-        function(data){
-            alert("Data Loaded: " + data);
-        });
+function login() {
+//TODO: hacer bien el login con la comprobacion de usuario y passwd
+    $.post("Otro.jsp", { name: "LOGIN", username: $("#usrname").val(), password: $("#password").val() }, function (result) {
+        if (result.split("&&&")[1] == "OK") {
+//            alert(result.split("&&&")[1]);
+            window.location = "Operations.jsp";
+        }
+        else
+        $("#error").css("display","block")
+    });
+}
 
-//    window.location = "Operations.jsp";
+function register() {
+    $("#login").css("display", "none");
+    $("#reg").css("display", "none");
+    $("#register").css("display", "block");
+    $("#log").css("display", "block");
+}
+
+function loginagain() {
+    $("#login").css("display", "block");
+    $("#reg").css("display", "block");
+    $("#register").css("display", "none");
+    $("#log").css("display", "none");
 }
