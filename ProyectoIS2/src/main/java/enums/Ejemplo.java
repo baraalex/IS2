@@ -9,5 +9,6 @@ package enums;
  */
 public enum Ejemplo {
     LOGIN,
-    REGISTRO
+    REGISTRO,
+    START
 }

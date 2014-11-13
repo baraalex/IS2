@@ -9,8 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
 
-    Ejemplo ej = Ejemplo.valueOf(request.getParameter("name"));
-    switch (ej) {
+    Ejemplo action = Ejemplo.valueOf(request.getParameter("action"));
+    switch (action) {
         case LOGIN:
             String usr = request.getParameter("username");
             String pass = request.getParameter("password");
