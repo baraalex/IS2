@@ -25,7 +25,7 @@
                 out.println("&&&NOTOK&&&");
             break;
         case REGISTRO:
-            String usr1 = request.getParameter("userName");
+            String usr1 = request.getParameter("username");
             String pass1 = request.getParameter("password");
             String email = request.getParameter("email");
             String nombre = request.getParameter("nombre");

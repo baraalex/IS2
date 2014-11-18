@@ -7,7 +7,6 @@ import java.sql.*;
  */
 public final class Database {
     private static Connection connection;
-    private static String serverName = "localhost";
     private static String userName = "IS2";
     private static String password = "IS2Prac";
     private static String url = "jdbc:mysql://localhost:3306/practica";
@@ -15,9 +14,9 @@ public final class Database {
     private static Database instance;
 
     private Database() {
-//        String driverName = "com.mysql.jdbc.Driver";
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            createDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -34,10 +33,13 @@ public final class Database {
         Database.instance = instance;
     }
 
-    public boolean createDB() {
+    private boolean createDB() {
         try {
             connection = DriverManager.getConnection(url, userName, password);
             Statement stmt = connection.createStatement();
+
+            String schema = "CREATE DATABASE IF NOT EXISTS `practica` /*!40100 DEFAULT CHARACTER SET utf8 */;";
+            stmt.executeUpdate(schema);
 
             String acta = "CREATE TABLE IF NOT EXISTS `acta` (" +
                     "  `Id` int(11) NOT NULL AUTO_INCREMENT," +
@@ -125,12 +127,12 @@ public final class Database {
             stmt.executeUpdate(miembrosCCC);
             stmt.executeUpdate(pC);
             stmt.executeUpdate(documnetos);
+            stmt.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
 
@@ -142,11 +144,10 @@ public final class Database {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '"
                             + usr + "' AND Contraseña LIKE '" + pass + "';");
-            while (rs.next()) {
-                String id = rs.getString("Usuario");
-                String passw = rs.getString("Contraseña");
+            if (rs.next()) {
                 ret = true;
             }
+            stmt.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -170,6 +171,7 @@ public final class Database {
                 pr.execute();
                 ret = true;
             }
+            stmt.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
