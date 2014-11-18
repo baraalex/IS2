@@ -9,39 +9,80 @@
 <html>
 <head>
     <title>Registro</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/external/jquery/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <%--<script type="text/javascript" src="js/npm.js"></script>--%>
+    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 <body>
 
-<section class="container">
-    <div id="register" class="login">
-        <h1>Register</h1>
-
-        <form name="regist" METHOD="post" action="index.jsp">
-            <p><input type="text" name="userName" value="" placeholder="Username" required=""></p>
-
-            <p><input type="email" name="email" value="" placeholder="Email" required=""></p>
-
-            <p><input type="text" name="realName" value="" placeholder="Nombre completo" required=""></p>
-
-            <p><input type="text" name="realName" value="" placeholder="Telefono" required=""></p>
-
-            <p><input type="password" name="password" value="" placeholder="Password" required=""></p>
-
-            <p><input type="password" name="passwordConfirm" value="" placeholder="Confirm password" required=""></p>
-
-            <p class="submit">
-                <input type="submit" name="commit" value="Login" onclick="register(this.form)">
-            </p>
-        </form>
+<div class="container" style="width: 500px">
+    <div id="errorusername" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <strong>Username already exist.</strong> Please select other username.
     </div>
-    <div id="log" class="login-help" style="cursor: pointer;">
-        <p><a onclick="loginagain()">Click here to go back to Login</a>.</p>
+    <div id="errorpass" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <strong>Password are not the same.</strong> Please rewrite them.
     </div>
-</section>
+    <div id="errortelf" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <strong>Telephone are not valid.</strong> Please rewrite them.
+    </div>
+
+    <form name="registerform" action="index.jsp" method="post" style="padding-top: 2%" onsubmit="return register(this)">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Register</h3>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" id="userName" name="userName" class="form-control" placeholder="Username"
+                           required="" value="">
+                </div>
+
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                           required="" value="">
+                </div>
+
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" id="realName" name="realName" class="form-control" placeholder="Nombre completo"
+                           required="" value="">
+                </div>
+
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                    <input type="number" id="Telefono" name="Telefono" class="form-control"
+                           placeholder="Phone (9 digits)"
+                           required="" value="">
+                </div>
+
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input id="password" type="password" name="password" placeholder="Password"
+                           class="form-control" required="" value="">
+                </div>
+
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Confirm password"
+                           class="form-control" required="" value="">
+                </div>
+                <div style="padding-top: 2%">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <p class="navbar-text navbar-right"><a href="index.jsp" class="navbar-link">Click here to go back to Login</a></p>
+</div>
 </body>
 </html>

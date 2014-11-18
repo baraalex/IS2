@@ -1,4 +1,4 @@
-<%@ page import="enums.Ejemplo" %>
+<%@ page import="enums.AppEnums" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alejandro
@@ -11,7 +11,7 @@
 <HTML>
 
 <HEAD>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/external/jquery/jquery.js"></script>

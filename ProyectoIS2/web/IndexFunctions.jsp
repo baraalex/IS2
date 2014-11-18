@@ -1,4 +1,5 @@
-<%@ page import="enums.Ejemplo" %>
+<%@ page import="enums.AppEnums" %>
+<%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alejandro
@@ -9,23 +10,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
 
-    Ejemplo action = Ejemplo.valueOf(request.getParameter("action"));
+    enums.AppEnums action = enums.AppEnums.valueOf(request.getParameter("action"));
     switch (action) {
         case LOGIN:
             String usr = request.getParameter("username");
             String pass = request.getParameter("password");
-            System.out.println("user: " + usr);
-            System.out.println("pass: " + pass);
             if (usr != null && pass != null && usr.length() > 0 && pass.length() > 0) {
-               //TODO comprobar usr y passd
-                System.out.println("ok");
-                out.println("&&&OK&&&");
+                //TODO comprobar usr y passd
+                if (Database.getInstance().login(usr, pass)) {
+                    out.println("&&&OK&&&");
+                } else
+                    out.println("&&&NOTOK&&&");
             } else
                 out.println("&&&NOTOK&&&");
-            System.out.println("pasa");
             break;
         case REGISTRO:
-            break;
+            String usr1 = request.getParameter("userName");
+            String pass1 = request.getParameter("password");
+            String email = request.getParameter("email");
+            String nombre = request.getParameter("nombre");
+            int telf = Integer.valueOf(request.getParameter("telf"));
 
+            if (Database.getInstance().register(usr1, pass1, email, telf, nombre))
+                out.println("&&&OK&&&");
+            else
+                out.println("&&&NOTOK&&&");
+            break;
     }
 %>

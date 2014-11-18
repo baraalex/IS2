@@ -7,7 +7,7 @@ package enums;
  * Time: 19:33
  * To change this template use File | Settings | File Templates.
  */
-public enum Ejemplo {
+public enum AppEnums {
     LOGIN,
     REGISTRO,
     START

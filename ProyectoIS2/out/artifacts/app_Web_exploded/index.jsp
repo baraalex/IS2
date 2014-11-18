@@ -16,39 +16,53 @@
     <%--<meta charset="utf-8">--%>
     <%--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">--%>
     <title>Login Form</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/external/jquery/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
 
-    <%--<!--[if lt IE 9]><!--<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>--><![endif]-->--%>
 </head>
 <body>
-<section class="container">
+<div class="container" style="width: 500px">
 
-    <div id="error" style="display: none; width:80%;margin: -20px auto 21px;line-height: 40px;font-size: 15px;font-weight: bold;
-color: #555;text-align: center;text-shadow: 0 1px white;background: #f3f3f3;">
-        <h1>Username or password invalid. Please login again</h1>
+    <div id="error" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <strong>Wrong pasword or username.</strong> Please login again.
     </div>
+    <form name="log" action="Operations.jsp" onsubmit="return login(this)" method="post" style="padding-top: 2%">
 
-    <div id="login" class="login" style="display: block">
-        <h1>Login to Web App</h1>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Login to Web App</h3>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" id="usrname" name="username" class="form-control" placeholder="Username"
+                           required="" <%
+                        if(request.getParameter("userName")!=null)
+                            %> value="<%=request.getParameter("userName")%>" <%
+                        %>>
+                </div>
 
-        <form name="log" action="Operations.jsp" onsubmit="return login(this)"  method="post">
-            <p><input id="usrname" type="text" name="username" value="" placeholder="Username" required=""></p>
+                <div class="input-group" style="padding-top: 1%">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input id="password" type="password" name="password" value="" placeholder="Password"
+                           class="form-control" required="">
+                </div>
 
-            <p><input id="password" type="password" name="password" value="" placeholder="Password" required=""></p>
+                <div style="padding-top: 2%">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+                </div>
+            </div>
+        </div>
+    </form>
 
-            <p class="submit">
-                <input type="submit" name="commit" value="Login" >
-            </p>
-        </form>
-
-    </div>
-    <div id="reg" class="login-help" style="cursor: default;">
-        <p>Are you not registered? <a style="cursor: pointer;" onclick="goregister()">Click here to Register</a>.</p>
-    </div>
-</section>
+    <p class="navbar-text navbar-right">Are you not registered? <a href="Register.jsp" class="navbar-link">Click here to
+        Register</a></p>
+</div>
 </body>
 </html>
