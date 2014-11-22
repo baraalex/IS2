@@ -9,8 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-
-    enums.AppEnums action = enums.AppEnums.valueOf(request.getParameter("action"));
+    AppEnums action = AppEnums.valueOf(request.getParameter("action"));
     switch (action) {
         case LOGIN:
             String usr = request.getParameter("username");

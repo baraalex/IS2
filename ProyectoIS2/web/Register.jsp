@@ -16,19 +16,24 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <%--<script type="text/javascript" src="js/npm.js"></script>--%>
-    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
 
 <div class="container" style="width: 500px">
     <div id="errorusername" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
         <strong>Username already exist.</strong> Please select other username.
     </div>
     <div id="errorpass" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
         <strong>Password are not the same.</strong> Please rewrite them.
     </div>
     <div id="errortelf" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
         <strong>Telephone are not valid.</strong> Please rewrite them.
     </div>
 
@@ -59,7 +64,7 @@
 
                 <div class="input-group" style="padding-top: 1%">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                    <input type="number" id="Telefono" name="Telefono" class="form-control"
+                    <input type="text" id="Telefono" name="Telefono" class="form-control"
                            placeholder="Phone (9 digits)"
                            required="" value="">
                 </div>

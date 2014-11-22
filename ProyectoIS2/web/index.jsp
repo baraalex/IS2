@@ -30,6 +30,8 @@
 <div class="container" style="width: 500px">
 
     <div id="error" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
         <strong>Wrong pasword or username.</strong> Please login again.
     </div>
     <form name="log" action="Operations.jsp" onsubmit="return login(this)" method="post" style="padding-top: 2%">
