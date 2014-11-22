@@ -18,11 +18,18 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/sessions.js"></script>
 
 </head>
 <body>
+<%
+    HttpSession sesion = request.getSession();
+    String user = (String) sesion.getAttribute("user");
+    System.out.println(user);
+%>
+
 <div class="container">
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -40,22 +47,23 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="#">CCC</a></li>
+                    <li><a href="#">PC</a></li>
+                    <%--<li class="dropdown">--%>
+                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown--%>
+                    <%--<span class="caret"></span></a>--%>
+                    <%--<ul class="dropdown-menu" role="menu">--%>
+                    <%--<li><a href="#">Action</a></li>--%>
+                    <%--<li><a href="#">Another action</a></li>--%>
+                    <%--<li><a href="#">Something else here</a></li>--%>
+                    <%--<li class="divider"></li>--%>
+                    <%--<li><a href="#">Separated link</a></li>--%>
+                    <%--<li class="divider"></li>--%>
+                    <%--<li><a href="#">One more separated link</a></li>--%>
+                    <%--</ul>--%>
+                    <%--</li>--%>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" onclick="exit()">
                     <li><a class="navbar-brand" href="index.jsp">exit</a></li>
                 </ul>
             </div>
@@ -70,11 +78,27 @@
             <h3 class="panel-title">User Information</h3>
         </div>
         <div class="panel-body">
-            Panel content
+
+            <div class="col-sm-8">
+                <div class="panel panel-default" style="padding-top: 0;">
+                    <div class="panel-heading">Informacion Personal</div>
+                    <div class="panel-body">
+                        <div id="personal"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-default" style="padding-top: 0;">
+                    <div class="panel-heading">Tus CCCs</div>
+                    <div class="panel-body">
+                        <div id="cccs"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
-
-
-</div>
 </body>
 </html>

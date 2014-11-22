@@ -7,7 +7,7 @@
  */
 
 function login(form) {
-    $.post("IndexFunctions.jsp", { action: "LOGIN", username: form.username.value, password: form.password.value }, function (result) {
+    $.post("Functions.jsp", { action: "LOGIN", username: form.username.value, password: form.password.value }, function (result) {
         if (result.split("&&&")[1] != "OK") {
             $("#error").css("display", "block");
         }

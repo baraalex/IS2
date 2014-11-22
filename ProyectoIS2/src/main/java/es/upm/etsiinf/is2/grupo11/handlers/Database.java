@@ -1,9 +1,10 @@
 package es.upm.etsiinf.is2.grupo11.handlers;
 
-import enums.PCestados;
+import es.upm.etsiinf.is2.grupo11.enums.PCestados;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
  * Class To handle a Connection and Configuration to a Database
@@ -204,6 +205,34 @@ public final class Database {
         return ret;
     }
 
+    public HashMap<String, String> getUser(String user) {
+        HashMap<String, String> cccs = new HashMap<String, String>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '" + user + "';");
+            while (rs.next()) {
+                String nombre = rs.getString("Nombre");
+                cccs.put("Nombre", nombre);
+                String mail = rs.getString("e-mail");
+                cccs.put("e-mail", mail);
+                String telf = String.valueOf(rs.getInt("Telefono"));
+                cccs.put("Telefono", telf);
+                String tipo = String.valueOf(rs.getInt("Tipo"));
+                cccs.put("Tipo", tipo);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cccs;
+    }
+
     public boolean modifyUser(String usr, String pass, String email, int telf, String nombre, int tipo) {
         boolean modif = false;
         String sql = "UPDATE `usuario`" +
@@ -372,6 +401,38 @@ public final class Database {
         return cccs;
     }
 
+
+    public HashMap<String, Boolean> getUserCCCs(String user) {
+        HashMap<String, Boolean> cccs = new HashMap<String, Boolean>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `miembros_ccc` WHERE `Usuario` LIKE '" + user + "';");
+            while (rs.next()) {
+                String nombre = rs.getString("CCC");
+                boolean admin = false;
+                Statement stmt2 = connection.createStatement();
+                ResultSet rs2 = stmt2
+                        .executeQuery("SELECT * FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
+                if (rs2.next()) {
+                    admin = rs2.getString("Admin").equals(user);
+                }
+                rs2.close();
+                stmt2.close();
+                cccs.put(nombre, admin);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cccs;
+    }
+
     public boolean createPC(String fecha, String desc, String motivo, String ccc, String usuario, String reunion) {
         boolean crete = false;
         String aux = "INSERT INTO `pc`(`Fecha`,`Descripcion`,`Motivo`,`CCC`,`Usuario`," +
@@ -423,5 +484,33 @@ public final class Database {
         }
 
         return modif;
+    }
+
+    public HashMap<String, String> getUserPC(String user) {
+        HashMap<String, String> cccs = new HashMap<String, String>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '" + user + "';");
+            while (rs.next()) {
+                String nombre = rs.getString("Nombre");
+                cccs.put("Nombre", nombre);
+                String mail = rs.getString("e-mail");
+                cccs.put("e-mail", mail);
+                String telf = String.valueOf(rs.getInt("Telefono"));
+                cccs.put("Telefono", telf);
+                String tipo = String.valueOf(rs.getInt("Tipo"));
+                cccs.put("Tipo", tipo);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cccs;
     }
 }

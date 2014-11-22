@@ -8,7 +8,7 @@
 function register(form) {
     if (form.password.value == form.passwordConfirm.value && form.Telefono.value.length == 9) {
         $("#errorpass").css("display", "none");
-        $.post("IndexFunctions.jsp", { action: "REGISTRO", username: form.userName.value, password: form.password.value,
+        $.post("Functions.jsp", { action: "REGISTRO", username: form.userName.value, password: form.password.value,
             email: form.email.value, nombre: form.realName.value, telf: form.Telefono.value}, function (result) {
             if (result.split("&&&")[1] == "OK") {
                 $("#errorusername").css("display", "none");

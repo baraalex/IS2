@@ -1,4 +1,4 @@
-package enums;
+package es.upm.etsiinf.is2.grupo11.enums;
 
 /**
  * Created with IntelliJ IDEA.

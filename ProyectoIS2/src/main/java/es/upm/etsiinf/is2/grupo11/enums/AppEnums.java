@@ -1,4 +1,4 @@
-package enums;
+package es.upm.etsiinf.is2.grupo11.enums;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,5 +10,7 @@ package enums;
 public enum AppEnums {
     LOGIN,
     REGISTRO,
-    START
+    EXIT,
+    CCSINFO,
+    INFO
 }
