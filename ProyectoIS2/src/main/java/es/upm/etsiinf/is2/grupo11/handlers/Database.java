@@ -397,7 +397,7 @@ public final class Database {
 
     public boolean modifyPC(int id, PCestados nombre) {
         boolean modif = false;
-        String sql = "UPDATE `pc` SET `Estado`='" + nombre + "' WHERE `ID` LIKE '" + id + "';";
+        String estados;
         try {
             connection = DriverManager.getConnection(url, userName, password);
 
@@ -405,6 +405,10 @@ public final class Database {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `pc` WHERE `ID` LIKE '" + id + "';");
             if (rs.next()) {
+                estados = rs.getString("`Historial`");
+                estados += "&&&" + estados;
+                String sql = "UPDATE `pc` SET `Estado`='" + nombre + "', `Historial`='" + estados + "'     WHERE `ID`" +
+                        " LIKE '" + id + "';";
                 PreparedStatement pr = connection
                         .prepareStatement(sql);
                 pr.execute();

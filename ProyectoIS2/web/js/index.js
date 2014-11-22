@@ -18,9 +18,3 @@ function login(form) {
     });
     return false;
 }
-
-//$(document).ready(function () {
-//    /*
-//     * When the site is loaded, should make the tables if the are not initialized
-//     * */
-//});

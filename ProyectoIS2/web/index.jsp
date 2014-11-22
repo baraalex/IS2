@@ -6,15 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
-<%--<!DOCTYPE html>--%>
-<%--<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->--%>
-<%--<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->--%>
-<%--<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->--%>
-<%--<!--[if gt IE 8]><!-->--%>
 <html lang="en"> <!--<![endif]-->
 <head>
-    <%--<meta charset="utf-8">--%>
-    <%--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">--%>
     <title>Login Form</title>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -23,7 +16,7 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
 </head>
 <body>
@@ -34,7 +27,7 @@
         <span class="sr-only">Error:</span>
         <strong>Wrong pasword or username.</strong> Please login again.
     </div>
-    <form name="log" action="Operations.jsp" onsubmit="return login(this)" method="post" style="padding-top: 2%">
+    <form name="log" action="logged.jsp" onsubmit="return login(this)" method="post" style="padding-top: 2%">
 
         <div class="panel panel-success">
             <div class="panel-heading">
