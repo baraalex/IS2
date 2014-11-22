@@ -17,7 +17,7 @@
     <file path="/style.scss" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1415736973132" ignored="false" />
     <file path="/IndexFunctions.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416267106438" ignored="false" />
     <file path="/a.dummy" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416264995430" ignored="false" />
-    <file path="/Database.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416658559731" ignored="false" />
+    <file path="/Database.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416659306981" ignored="false" />
     <file path="/index.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416173230035" ignored="false" />
     <file path="/Register.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416653122621" ignored="false" />
     <file path="/functions.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416268270782" ignored="false" />
@@ -132,7 +132,7 @@
       <file leaf-file-name="Database.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="392" column="0" selection-start="15748" selection-end="15748" vertical-scroll-proportion="0.8440367">
+            <state line="397" column="54" selection-start="16037" selection-end="16037" vertical-scroll-proportion="0.896789">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Database#0;class#Database#0" expanded="false" />
@@ -148,10 +148,10 @@
                 <element signature="method#addUserCCC#0;class#Database#0" expanded="false" />
                 <element signature="method#deleteUserCCC#0;class#Database#0" expanded="false" />
                 <element signature="method#getCCCs#0;class#Database#0" expanded="false" />
-                <element signature="e#14370#14378#0" expanded="true" />
+                <element signature="e#14604#14612#0" expanded="true" />
                 <element signature="method#createPC#0;class#Database#0" expanded="false" />
                 <element signature="method#modifyPC#0;class#Database#0" expanded="false" />
-                <marker date="1416658602378" expanded="true" signature="1191:1229" placeholder="/*!40100 DEF..." />
+                <marker date="1416659427766" expanded="true" signature="1334:1372" placeholder="/*!40100 DEF..." />
               </folding>
             </state>
           </provider>
@@ -338,24 +338,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProyectoIS2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProyectoIS2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -707,14 +689,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39869988" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986637" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.27282852" order="1" side_tool="true" content_ui="tabs" />
@@ -728,7 +710,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.6703786" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.6013363" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -912,7 +894,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="392" column="0" selection-start="15748" selection-end="15748" vertical-scroll-proportion="0.8440367">
+        <state line="397" column="54" selection-start="16037" selection-end="16037" vertical-scroll-proportion="0.896789">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Database#0;class#Database#0" expanded="false" />
@@ -928,10 +910,10 @@
             <element signature="method#addUserCCC#0;class#Database#0" expanded="false" />
             <element signature="method#deleteUserCCC#0;class#Database#0" expanded="false" />
             <element signature="method#getCCCs#0;class#Database#0" expanded="false" />
-            <element signature="e#14370#14378#0" expanded="true" />
+            <element signature="e#14604#14612#0" expanded="true" />
             <element signature="method#createPC#0;class#Database#0" expanded="false" />
             <element signature="method#modifyPC#0;class#Database#0" expanded="false" />
-            <marker date="1416658602378" expanded="true" signature="1191:1229" placeholder="/*!40100 DEF..." />
+            <marker date="1416659427766" expanded="true" signature="1334:1372" placeholder="/*!40100 DEF..." />
           </folding>
         </state>
       </provider>

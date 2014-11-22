@@ -20,6 +20,8 @@ public final class Database {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             createDB();
+            register("admin", "admin", "admin@admin.es", 123456789, "Administrador");
+            modifyUser("admin", null, null, 0, null, 1);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -202,10 +204,10 @@ public final class Database {
         return ret;
     }
 
-    public boolean modifyUser(String usr, String pass, String email, int telf, String nombre) {
+    public boolean modifyUser(String usr, String pass, String email, int telf, String nombre, int tipo) {
         boolean modif = false;
         String sql = "UPDATE `usuario`" +
-                "SET";
+                "SET ";
         if (pass != null && !pass.equals(""))
             sql += "`Contraseña`='" + pass + "',";
         if (email != null && !email.equals(""))
@@ -213,7 +215,9 @@ public final class Database {
         if (telf > 0)
             sql += "`Telefono`='" + telf + "',";
         if (nombre != null && !nombre.equals(""))
-            sql += "`Nombre`='" + nombre + "'";
+            sql += "`Nombre`='" + nombre + "',";
+        if (tipo == 1 || tipo == 0)
+            sql += "`Tipo`='" + tipo + "'";
         if (sql.endsWith(","))
             sql = sql.substring(0, sql.lastIndexOf(","));
         sql += "WHERE Usuario LIKE '" + usr + "';";
@@ -223,7 +227,7 @@ public final class Database {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '" + usr + "';");
-            if (!rs.next()) {
+            if (rs.next()) {
                 PreparedStatement pr = connection
                         .prepareStatement(sql);
                 pr.execute();
@@ -400,7 +404,7 @@ public final class Database {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `pc` WHERE `ID` LIKE '" + id + "';");
-            if (!rs.next()) {
+            if (rs.next()) {
                 PreparedStatement pr = connection
                         .prepareStatement(sql);
                 pr.execute();
