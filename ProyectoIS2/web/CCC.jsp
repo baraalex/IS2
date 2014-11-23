@@ -1,3 +1,13 @@
+<%
+    HttpSession sesion = request.getSession();
+    if(sesion.getAttribute("user")==null){
+        // New location to be redirected
+        String site = new String("./");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site);
+    }
+    else{
+%>
 <%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
 <%@ page import="java.util.HashMap" %>
 <%--
@@ -24,7 +34,6 @@
 </head>
 <body>
 <%
-    HttpSession sesion = request.getSession();
     String user = (String) sesion.getAttribute("user");
 
 %>
@@ -130,3 +139,4 @@
 </div>
 </body>
 </html>
+<% } %>
