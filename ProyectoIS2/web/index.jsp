@@ -18,7 +18,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html lang="en"> <!--<![endif]-->
 <head>
-    <title>Login Form</title>
+    <title>SEGECA - Login Form</title>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/external/jquery/jquery.js"></script>
@@ -41,7 +41,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title">Login to Web App</h3>
+                <h3 class="panel-title">SEGECA Login Page</h3>
             </div>
             <div class="panel-body">
                 <div class="input-group">

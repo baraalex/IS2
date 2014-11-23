@@ -156,6 +156,13 @@ public final class Database {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(!connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
         return ret;
     }

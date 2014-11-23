@@ -20,7 +20,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>SEGECA - CCCs</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -50,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="cursor: default">IS2</a>
+                <a class="navbar-brand" style="cursor: default">SEGECA IS2</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
