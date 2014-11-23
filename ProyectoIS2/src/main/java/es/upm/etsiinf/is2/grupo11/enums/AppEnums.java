@@ -12,5 +12,9 @@ public enum AppEnums {
     REGISTRO,
     EXIT,
     CCSINFO,
-    INFO
+    INFO,
+    CCC,
+    DELETEUSRCCC,
+    DELETECCC,
+    ADDCCC
 }

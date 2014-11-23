@@ -1,12 +1,13 @@
+<%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
+<%@ page import="java.util.HashMap" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alejandro
-  Date: 6/11/14
-  Time: 19:16
+  Date: 22/11/14
+  Time: 22:22
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>Home</title>
@@ -18,7 +19,7 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/sessions.js"></script>
+    <script type="text/javascript" src="js/CCC.js"></script>
 
 </head>
 <body>
@@ -46,8 +47,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-                    <li><a href="CCC.jsp">CCC</a></li>
+                    <li><a href="logged.jsp">Home</a></li>
+                    <li class="active"><a href="#">CCC<span class="sr-only">(current)</span></a></li>
                     <li><a href="#">PC</a></li>
                     <%--<li class="dropdown">--%>
                     <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown--%>
@@ -79,19 +80,47 @@
         </div>
         <div class="panel-body">
 
-            <div class="col-sm-8">
-                <div class="panel panel-default" style="padding-top: 0;">
-                    <div class="panel-heading">Informacion Personal</div>
-                    <div class="panel-body">
-                        <div id="personal"></div>
+            <div id="errorcreate" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <strong>Error at create CCC.</strong> Please try again later.
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Select CCC to show</label>
+
+                <div style="display: flex;">
+                    <select class="form-control col-md-4" id="sel1" style="width: inherit;" onchange="cccInfo()">
+                        <option value=""></option>
+
+                        <%
+                            HashMap<String, Boolean> ccc = Database.getInstance().getUserCCCs(user);
+                            for (String s : ccc.keySet()) {
+                        %>
+                        <option value="<%=s%>"><%=s%>
+                        </option>
+                        <%
+                            }
+                        %>
+                    </select>
+
+                    <div class="col-md-4" id="deleteCCC"></div>
+
+                    <div class="input-group col-md-4">
+                        <input type="text" id="nuevoCCC" class="form-control" value="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" onclick="addCCC()">Añadir CCC</button>
+                        </span>
                     </div>
+                    <!-- /input-group -->
                 </div>
             </div>
 
-            <div class="col-sm-4">
+
+            <div class="col-sm-6">
                 <div class="panel panel-default" style="padding-top: 0;">
-                    <div class="panel-heading">Tus CCCs</div>
-                    <div id="cccs"></div>
+                    <div class="panel-heading">Usuarios del CCC seleccionado</div>
+                    <div id="CCCInfo"></div>
                 </div>
             </div>
 

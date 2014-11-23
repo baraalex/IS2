@@ -19,7 +19,7 @@ public final class Database {
 
     private Database() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.mariadb.jdbc.Driver");
             createDB();
             register("admin", "admin", "admin@admin.es", 123456789, "Administrador");
             modifyUser("admin", null, null, 0, null, 1);
@@ -77,8 +77,8 @@ public final class Database {
                     "  `Admin` varchar(45) NOT NULL," +
                     "  PRIMARY KEY (`Nombre`)," +
                     "  UNIQUE KEY `Nombre_UNIQUE` (`Nombre`)," +
-                    "  KEY `Admin_idx` (`Admin`)," +
-                    "  CONSTRAINT `Admin` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION" +
+                    "  KEY `Admin_idx` (`Admin`),\n" +
+                    "  CONSTRAINT `Admin` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`)" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
             String documnetos = "CREATE TABLE IF NOT EXISTS `documentos` (" +
@@ -93,9 +93,9 @@ public final class Database {
                     "  `Usuario` varchar(45) NOT NULL," +
                     "  PRIMARY KEY (`CCC`,`Usuario`)," +
                     "  KEY `Usuario_idx` (`Usuario`)," +
-                    "  CONSTRAINT `CCC` FOREIGN KEY (`CCC`) REFERENCES `ccc` (`Nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION," +
-                    "  CONSTRAINT `Usuario` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`Usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                    "  CONSTRAINT `CCC` FOREIGN KEY (`CCC`) REFERENCES `ccc` (`Nombre`)," +
+                    "  CONSTRAINT `Usuario` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`Usuario`)" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n";
 
             String pC = "CREATE TABLE IF NOT EXISTS `pc` (" +
                     "  `ID` int(11) NOT NULL AUTO_INCREMENT," +
@@ -111,8 +111,8 @@ public final class Database {
                     "  UNIQUE KEY `ID_UNIQUE` (`ID`)," +
                     "  KEY `ccc_idx` (`CCC`)," +
                     "  KEY `usuario_idx` (`Usuario`)," +
-                    "  CONSTRAINT `CCC_eval` FOREIGN KEY (`CCC`) REFERENCES `ccc` (`Nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION," +
-                    "  CONSTRAINT `user` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`Usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION" +
+                    "  CONSTRAINT `CCC_eval` FOREIGN KEY (`CCC`) REFERENCES `ccc` (`Nombre`) ," +
+                    "  CONSTRAINT `user` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`Usuario`)" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
             String usuario = "CREATE TABLE IF NOT EXISTS `usuario` (" +
@@ -151,6 +151,7 @@ public final class Database {
             if (rs.next()) {
                 ret = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -172,6 +173,7 @@ public final class Database {
                 pr.close();
                 ret = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -196,6 +198,7 @@ public final class Database {
                 ret = true;
                 pr.close();
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -215,12 +218,12 @@ public final class Database {
                     .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '" + user + "';");
             while (rs.next()) {
                 String nombre = rs.getString("Nombre");
-                cccs.put("Nombre", nombre);
                 String mail = rs.getString("e-mail");
-                cccs.put("e-mail", mail);
                 String telf = String.valueOf(rs.getInt("Telefono"));
-                cccs.put("Telefono", telf);
                 String tipo = String.valueOf(rs.getInt("Tipo"));
+                cccs.put("Nombre", nombre);
+                cccs.put("e-mail", mail);
+                cccs.put("Telefono", telf);
                 cccs.put("Tipo", tipo);
             }
             rs.close();
@@ -263,6 +266,7 @@ public final class Database {
                 modif = true;
                 pr.close();
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -295,6 +299,7 @@ public final class Database {
                 pr.close();
                 crete = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -323,6 +328,7 @@ public final class Database {
                 pr.close();
                 crete = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -347,6 +353,7 @@ public final class Database {
                 pr.close();
                 added = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -371,6 +378,7 @@ public final class Database {
                 pr.close();
                 added = true;
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -392,6 +400,7 @@ public final class Database {
                 String nombre = rs.getString("Nombre");
                 cccs.add(nombre);
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -401,6 +410,40 @@ public final class Database {
         return cccs;
     }
 
+    public HashMap<String, Boolean> getCCCUserss(String CCC) {
+        HashMap<String, Boolean> cccs = new HashMap<String, Boolean>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `miembros_ccc` WHERE `CCC` LIKE '" + CCC + "';");
+            Statement stmt2 = connection.createStatement();
+            ResultSet rs2 = null;
+            while (rs.next()) {
+                String nombre = rs.getString("Usuario");
+                boolean admin = false;
+                rs2 = stmt2
+                        .executeQuery("SELECT * FROM `ccc` WHERE `Nombre` LIKE '" + CCC + "';");
+                if (rs2.next()) {
+                    admin = rs2.getString("Admin").equals(nombre);
+                }
+                cccs.put(nombre, admin);
+            }
+
+            if (rs2 != null) {
+                rs2.close();
+            }
+            stmt2.close();
+
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cccs;
+    }
 
     public HashMap<String, Boolean> getUserCCCs(String user) {
         HashMap<String, Boolean> cccs = new HashMap<String, Boolean>();
@@ -410,26 +453,30 @@ public final class Database {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `miembros_ccc` WHERE `Usuario` LIKE '" + user + "';");
+            Statement stmt2 = connection.createStatement();
+            ResultSet rs2 = null;
             while (rs.next()) {
                 String nombre = rs.getString("CCC");
                 boolean admin = false;
-                Statement stmt2 = connection.createStatement();
-                ResultSet rs2 = stmt2
+                rs2 = stmt2
                         .executeQuery("SELECT * FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
                 if (rs2.next()) {
                     admin = rs2.getString("Admin").equals(user);
                 }
-                rs2.close();
-                stmt2.close();
                 cccs.put(nombre, admin);
             }
+
+            if (rs2 != null) {
+                rs2.close();
+            }
+            stmt2.close();
+
             rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return cccs;
     }
 
@@ -476,6 +523,7 @@ public final class Database {
                 modif = true;
                 pr.close();
             }
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException e) {

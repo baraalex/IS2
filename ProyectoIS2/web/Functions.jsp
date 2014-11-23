@@ -10,7 +10,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    AppEnums action = .AppEnums.valueOf(request.getParameter("action"));
+    AppEnums action = AppEnums.valueOf(request.getParameter("action"));
     switch (action) {
         case LOGIN:
             String usr = request.getParameter("username");
@@ -45,10 +45,15 @@
             String user = (String) request.getSession().getAttribute("user");
             HashMap<String, Boolean> info = Database.getInstance().getUserCCCs(user);
             out.println("&&&");
+            out.println("<ul class=\"list-group\" style=\"margin-bottom: 0;\">");
             for (String s : info.keySet()) {
-                out.println("<div style=\"height: 38;\"> <span class=\"label label-success form-control\" style=\"font-size: large;\">" + s
-                        + "</span></div>");
+                if (info.get(s))
+                    out.println("<li class=\"list-group-item list-group-item-info\">" + s + " <b style=\"font-size: small;\">(Administrador)</b></li>");
+                else
+                    out.println("<li class=\"list-group-item\">" + s + "</li>");
+
             }
+            out.println("</ul>");
             out.println("&&&");
 
             break;
@@ -72,5 +77,50 @@
             }
             out.println("&&&");
             break;
+        case CCC:
+            String ccc = request.getParameter("ccc");
+            HashMap<String, Boolean> users = Database.getInstance().getCCCUserss(ccc);
+            out.println("&&&");
+
+            for (String s : users.keySet()) {
+                out.println("<div class=\"input-group\">");
+                if (users.get(s))
+                    out.println("<span class=\"label label-warning form-control\" style=\"font-size: large;\">" + s +
+                            " <b style=\"font-size: small;\">(Administrador)</b></span><span class=\"input-group-addon\"></span>");
+                else
+                    out.println("<span class=\"label label-default form-control\" style=\"font-size: large;\">" + s +
+                            "</span>" + "<span class=\"input-group-btn\">\n" +
+                            "<button class=\"btn btn-default\" type=\"button\" onclick=\"deleteUser('" + s + "')\">Borrar del CCC</button>" +
+                            "</span>");
+                out.println("</div>");
+            }
+            out.println("&&&");
+
+            String user3 = (String) request.getSession().getAttribute("user");
+            if (!ccc.equals("") && users.get(user3))
+                out.println("<button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteCCC('" + ccc +
+                        "')\">Borrar CCC</button>");
+
+            out.println("&&&");
+
+            break;
+
+        case DELETEUSRCCC:
+            String CCC = request.getParameter("ccc");
+            String user_ = request.getParameter("usr");
+            Database.getInstance().deleteUserCCC(CCC, user_);
+            break;
+        case DELETECCC:
+            String deleteccc = request.getParameter("ccc");
+            Database.getInstance().deleteCCC(deleteccc);
+            break;
+        case ADDCCC:
+            String addccc = request.getParameter("ccc");
+            if (!Database.getInstance().createCCC(addccc, request.getParameter("usr")))
+                out.println("&&&NOTOK&&&");
+            else
+                out.println("&&&OK&&&");
+            break;
+
     }
 %>
