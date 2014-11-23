@@ -1,12 +1,11 @@
 <%
     HttpSession sesion = request.getSession();
-    if(sesion.getAttribute("user")!=null){
+    if (sesion.getAttribute("user") != null) {
         // New location to be redirected
         String site = new String("./logged.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
-    }
-    else{
+    } else {
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -75,8 +74,7 @@
                 <div class="input-group" style="padding-top: 1%">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
                     <input type="text" id="Telefono" name="Telefono" class="form-control"
-                           placeholder="Phone (9 digits)"
-                           required="" value="">
+                           placeholder="Phone (9 digits)" required="" value="" maxlength="9">
                 </div>
 
                 <div class="input-group" style="padding-top: 1%">

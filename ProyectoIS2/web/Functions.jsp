@@ -156,13 +156,13 @@
             String motivo = request.getParameter("mot");
             String ccc_ = request.getParameter("CCC");
 
-            if (Database.getInstance().createPC(date, descr, motivo, ccc_, (String)
-                    request.getSession().getAttribute("user"), null)) {
-
-            }
-
-
+            if (ccc_ != null && !ccc_.equals("") && Database.getInstance().createPC(date.replace("-", "/"), descr,
+                    motivo, ccc_, (String) request.getSession().getAttribute("user"), null)) {
+                out.println("&&&OK&&&");
+            } else
+                out.println("&&&NOTOK&&&");
             break;
+
 
     }
 %>

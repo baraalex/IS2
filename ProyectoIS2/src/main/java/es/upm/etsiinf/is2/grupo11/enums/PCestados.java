@@ -10,5 +10,5 @@ package es.upm.etsiinf.is2.grupo11.enums;
 public enum PCestados {
     aceptado,
     rechazado,
-    evaluación
+    evaluacion
 }

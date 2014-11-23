@@ -17,14 +17,21 @@ function newPCform() {
 }
 
 function newPC(form) {
-    $.post("Functions.jsp", { action: "ADDPC",date:form.fecha.value,descr:form.desc.value,mot:form.motivo.value,CCC:form.ccc.value}, function (result) {
+    if (form.ccc.value == "") {
+        $("#errorcreatepc").css("display", "block");
+        return false;
+    }
+
+    $.post("Functions.jsp", { action: "ADDPC", date: form.fecha.value, descr: form.desc.value, mot: form.motivo.value, CCC: form.ccc.value}, function (result) {
         if (result.split("&&&")[1] == "OK") {
             $("#errorcreatepc").css("display", "none");
             form.submit();
         }
-        else
+        else {
             $("#errorcreatepc").css("display", "block");
-
+            return false;
+        }
     });
+
 }
 

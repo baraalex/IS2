@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="cursor: default">IS2</a>
+                <a class="navbar-brand" style="cursor: default">SEGECA IS2</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,11 +87,9 @@
                     Nueva Peticion de Cambio
                 </button>
             </p>
-
             <div id="PCs">
 
             </div>
-
         </div>
     </div>
 </div>

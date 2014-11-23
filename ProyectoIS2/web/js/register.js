@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 function register(form) {
-    if (form.password.value == form.passwordConfirm.value && form.Telefono.value.length == 9) {
+    if (form.password.value == form.passwordConfirm.value) {
         $("#errorpass").css("display", "none");
         $.post("Functions.jsp", { action: "REGISTRO", username: form.userName.value, password: form.password.value,
             email: form.email.value, nombre: form.realName.value, telf: form.Telefono.value}, function (result) {
@@ -19,13 +19,6 @@ function register(form) {
         });
     } else {
         $("#errorpass").css("display", "block");
-    }
-    if (form.Telefono.value.length != 9) {
-        $("#errortelf").css("display", "block");
-        if (form.password.value == form.passwordConfirm.value)
-            $("#errorpass").css("display", "none");
-    } else {
-        $("#errortelf").css("display", "none");
     }
     return false;
 }
