@@ -1,12 +1,13 @@
+<%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
+<%@ page import="java.util.ArrayList" %>
 <%
     HttpSession sesion = request.getSession();
-    if(sesion.getAttribute("user")==null){
+    if (sesion.getAttribute("user") == null) {
         // New location to be redirected
         String site = new String("./");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
-    }
-    else{
+    } else {
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -32,11 +33,8 @@
 </head>
 <body>
 <%
-
     String user = (String) sesion.getAttribute("user");
-
 %>
-
 <div class="container">
     <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
@@ -58,25 +56,11 @@
                     <li><a href="logged.jsp">Home</a></li>
                     <li><a href="CCC.jsp">CCC</a></li>
                     <li class="active"><a href="#">PC<span class="sr-only">(current)</span></a></li>
-                    <%--<li class="dropdown">--%>
-                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown--%>
-                    <%--<span class="caret"></span></a>--%>
-                    <%--<ul class="dropdown-menu" role="menu">--%>
-                    <%--<li><a href="#">Action</a></li>--%>
-                    <%--<li><a href="#">Another action</a></li>--%>
-                    <%--<li><a href="#">Something else here</a></li>--%>
-                    <%--<li class="divider"></li>--%>
-                    <%--<li><a href="#">Separated link</a></li>--%>
-                    <%--<li class="divider"></li>--%>
-                    <%--<li><a href="#">One more separated link</a></li>--%>
-                    <%--</ul>--%>
-                    <%--</li>--%>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" onclick="exit()">
                     <li><a class="navbar-brand" href="index.jsp">exit</a></li>
                 </ul>
             </div>
-
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
@@ -87,6 +71,26 @@
             <h3 class="panel-title"></h3>
         </div>
         <div class="panel-body">
+
+            <div id="errorcreatepc" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <strong>Error at create PC.</strong> Please try again later.
+            </div>
+            <p>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"
+                                                                    aria-hidden="true"></span>
+                    Ver Peticiones de Cambio
+                </button>
+                <button type="button" class="btn btn-primary" onclick="newPCform()"><span class="glyphicon glyphicon-plus"
+                                                                    aria-hidden="true"></span>
+                    Nueva Peticion de Cambio
+                </button>
+            </p>
+
+            <div id="PCs">
+
+            </div>
 
         </div>
     </div>

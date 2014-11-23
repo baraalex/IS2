@@ -1,5 +1,6 @@
 <%@ page import="es.upm.etsiinf.is2.grupo11.enums.AppEnums" %>
 <%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +17,6 @@
             String usr = request.getParameter("username");
             String pass = request.getParameter("password");
             if (usr != null && pass != null && usr.length() > 0 && pass.length() > 0) {
-                //TODO comprobar usr y passd
                 if (Database.getInstance().login(usr, pass)) {
                     request.getSession().setAttribute("user", usr);
                     out.println("&&&OK&&&");
@@ -38,7 +38,6 @@
                 out.println("&&&NOTOK&&&");
             break;
         case EXIT:
-            System.out.println("sale");
             request.getSession().setAttribute("user", null);
             break;
         case CCSINFO:
@@ -120,6 +119,49 @@
                 out.println("&&&NOTOK&&&");
             else
                 out.println("&&&OK&&&");
+            break;
+        case ADDPCFORM:
+            String a = "<form name=\"nuevapet\" action=\"#\" method=\"post\" style=\"padding-top: 2%\" onsubmit=\"return newPC(this)\">" +
+                    "<div class=\"panel panel-success\"><div class=\"panel-heading\"><h3 class=\"panel-title\">" +
+                    "Nueva PC</h3></div><div class=\"panel-body\"><div class=\"input-group\">" +
+                    "<span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-calendar\"></span></span>" +
+                    "<input type=\"date\" id=\"fecha\" name=\"fecha\" class=\"form-control\" placeholder=\"Fecha\" " +
+                    "required=\"\" value=\"\"></div><div class=\"input-group\" style=\"padding-top: 1%\">" +
+                    "<span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-pencil\"></span></span>" +
+                    "<textarea type=\"text\" id=\"desc\" name=\"desc\" class=\"form-control\" " +
+                    "placeholder=\"Descripcion breve (Max 500 caracteres)\" required=\"\" value=\"\" maxlength=\"500\">" +
+                    "</textarea></div><div class=\"input-group\" style=\"padding-top: 1%\"><span class=\"input-group-addon\">" +
+                    "<span class=\"glyphicon glyphicon-pencil\"></span></span><textarea type=\"text\" id=\"motivo\" " +
+                    "name=\"motivo\" class=\"form-control\" placeholder=\"Motivo de la Peticion de cambio\" " +
+                    "required=\"\" value=\"\" maxlength=\"2000\"></textarea></div>" +
+                    "<div class=\"input-group\" style=\"padding-top: 1%\">" +
+                    "<select name=\"ccc\" class=\"form-control\" id=\"ccc\" style=\"width: inherit;\">" +
+                    "<option value=\"\"></option>";
+
+            String b = "</select></div><div style=\"padding-top: 2%\">" +
+                    "<input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"Register\">\n" +
+                    "</div></div></div></form>";
+            out.println("&&&");
+            out.println(a);
+            ArrayList<String> cccs = Database.getInstance().getCCCs();
+            for (String s : cccs) {
+                out.println("<option value='" + s + "'>" + s + "</option>");
+            }
+            out.println(b);
+            out.println("&&&");
+            break;
+        case ADDPC:
+            String date = request.getParameter("date");
+            String descr = request.getParameter("descr");
+            String motivo = request.getParameter("mot");
+            String ccc_ = request.getParameter("CCC");
+
+            if (Database.getInstance().createPC(date, descr, motivo, ccc_, (String)
+                    request.getSession().getAttribute("user"), null)) {
+
+            }
+
+
             break;
 
     }

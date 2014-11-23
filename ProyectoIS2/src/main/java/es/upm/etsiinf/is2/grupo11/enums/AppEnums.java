@@ -16,5 +16,7 @@ public enum AppEnums {
     CCC,
     DELETEUSRCCC,
     DELETECCC,
-    ADDCCC
+    ADDCCC,
+    ADDPCFORM,
+    ADDPC
 }

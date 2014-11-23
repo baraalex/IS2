@@ -299,7 +299,6 @@ public final class Database {
                 pr.execute();
                 pr.close();
 
-                //TODO admin en lista de miembros?
                 pr = connection
                         .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`)" + " VALUES('" + nombre + "','" + admin + "')");
                 pr.execute();
@@ -327,13 +326,13 @@ public final class Database {
             if (rs.next()) {
                 PreparedStatement pr = connection
                         .prepareStatement("DELETE FROM `miembros_ccc` WHERE `CCC` LIKE '" + nombre + "';");
-                pr.execute();
-                pr.close();
-
-                pr = connection
+                PreparedStatement pr2 = connection
                         .prepareStatement("DELETE FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
                 pr.execute();
+
+                pr2.execute();
                 pr.close();
+                pr2.close();
                 crete = true;
             }
             rs.close();
@@ -504,7 +503,6 @@ public final class Database {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            crete = false;
         }
 
 
@@ -542,6 +540,38 @@ public final class Database {
         return modif;
     }
 
+    public HashMap<String, String> getcccPC(String ccc) {
+        HashMap<String, String> cccs = new HashMap<String, String>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `pc` WHERE CCC LIKE '" + ccc + "';");
+            while (rs.next()) {
+                String Fecha = rs.getString("Fecha");
+                cccs.put("Fecha", Fecha);
+                String descripcion = rs.getString("Descripcion");
+                cccs.put("Descripcion", descripcion);
+                String motivo = rs.getString("Motivo");
+                cccs.put("Motivo", motivo);
+                String usuario = rs.getString("Usuario");
+                cccs.put("Usuario", usuario);
+                String estado = rs.getString("Estado");
+                cccs.put("Estado", estado);
+                String historial = rs.getString("Historial");
+                cccs.put("Historial", historial);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cccs;
+    }
+
     public HashMap<String, String> getUserPC(String user) {
         HashMap<String, String> cccs = new HashMap<String, String>();
         try {
@@ -549,16 +579,20 @@ public final class Database {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
-                    .executeQuery("SELECT * FROM `usuario` WHERE Usuario LIKE '" + user + "';");
+                    .executeQuery("SELECT * FROM `pc` WHERE Usuario LIKE '" + user + "';");
             while (rs.next()) {
-                String nombre = rs.getString("Nombre");
-                cccs.put("Nombre", nombre);
-                String mail = rs.getString("e-mail");
-                cccs.put("e-mail", mail);
-                String telf = String.valueOf(rs.getInt("Telefono"));
-                cccs.put("Telefono", telf);
-                String tipo = String.valueOf(rs.getInt("Tipo"));
-                cccs.put("Tipo", tipo);
+                String Fecha = rs.getString("Fecha");
+                cccs.put("Fecha", Fecha);
+                String descripcion = rs.getString("Descripcion");
+                cccs.put("Descripcion", descripcion);
+                String motivo = rs.getString("Motivo");
+                cccs.put("Motivo", motivo);
+                String ccc = rs.getString("CCC");
+                cccs.put("CCC", ccc);
+                String estado = rs.getString("Estado");
+                cccs.put("Estado", estado);
+                String historial = rs.getString("Historial");
+                cccs.put("Historial", historial);
             }
             rs.close();
             stmt.close();
