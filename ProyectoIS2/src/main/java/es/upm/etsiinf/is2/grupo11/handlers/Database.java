@@ -319,11 +319,12 @@ public final class Database {
                     .executeQuery("SELECT * FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
             if (rs.next()) {
                 PreparedStatement pr = connection
-                        .prepareStatement("DELETE FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
+                        .prepareStatement("DELETE FROM `miembros_ccc` WHERE `CCC` LIKE '" + nombre + "';");
                 pr.execute();
                 pr.close();
+
                 pr = connection
-                        .prepareStatement("DELETE FROM `miembros_ccc` WHERE `CCC` LIKE '" + nombre + "';");
+                        .prepareStatement("DELETE FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
                 pr.execute();
                 pr.close();
                 crete = true;

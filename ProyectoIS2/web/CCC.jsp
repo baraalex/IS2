@@ -26,7 +26,7 @@
 <%
     HttpSession sesion = request.getSession();
     String user = (String) sesion.getAttribute("user");
-    System.out.println(user);
+
 %>
 
 <div class="container">
@@ -49,7 +49,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="logged.jsp">Home</a></li>
                     <li class="active"><a href="#">CCC<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">PC</a></li>
+                    <li><a href="PC.jsp">PC</a></li>
                     <%--<li class="dropdown">--%>
                     <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown--%>
                     <%--<span class="caret"></span></a>--%>

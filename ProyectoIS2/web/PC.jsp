@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: Alejandro
-  Date: 6/11/14
-  Time: 19:16
+  Date: 23/11/14
+  Time: 18:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>Home</title>
@@ -18,10 +17,16 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/sessions.js"></script>
+    <script type="text/javascript" src="js/Pc.js"></script>
 
 </head>
 <body>
+<%
+    HttpSession sesion = request.getSession();
+    String user = (String) sesion.getAttribute("user");
+
+%>
+
 <div class="container">
     <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
@@ -40,9 +45,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="logged.jsp">Home</a></li>
                     <li><a href="CCC.jsp">CCC</a></li>
-                    <li><a href="PC.jsp">PC</a></li>
+                    <li class="active"><a href="#">PC<span class="sr-only">(current)</span></a></li>
                     <%--<li class="dropdown">--%>
                     <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown--%>
                     <%--<span class="caret"></span></a>--%>
@@ -72,23 +77,6 @@
             <h3 class="panel-title"></h3>
         </div>
         <div class="panel-body">
-
-            <div class="col-sm-8">
-                <div class="panel panel-default" style="padding-top: 0;">
-                    <div class="panel-heading">Informacion Personal</div>
-                    <div class="panel-body">
-                        <div id="personal"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-default" style="padding-top: 0;">
-                    <div class="panel-heading">Tus CCCs</div>
-                    <div id="cccs"></div>
-                </div>
-            </div>
-
 
         </div>
     </div>

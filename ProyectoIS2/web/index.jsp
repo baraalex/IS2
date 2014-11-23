@@ -20,11 +20,6 @@
 
 </head>
 <body>
-<%
-    HttpSession sesion = request.getSession();
-    String user = (String) sesion.getAttribute("user");
-    System.out.println("start " + user);
-%>
 <div class="container" style="width: 500px">
 
     <div id="error" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">

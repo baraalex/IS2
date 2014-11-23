@@ -116,7 +116,7 @@
             break;
         case ADDCCC:
             String addccc = request.getParameter("ccc");
-            if (!Database.getInstance().createCCC(addccc, request.getParameter("usr")))
+            if (!Database.getInstance().createCCC(addccc, (String) request.getSession().getAttribute("user")))
                 out.println("&&&NOTOK&&&");
             else
                 out.println("&&&OK&&&");
