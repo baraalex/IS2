@@ -1,12 +1,11 @@
 <%
     HttpSession sesion = request.getSession();
-    if(sesion.getAttribute("user")==null){
+    if (sesion.getAttribute("user") == null) {
         // New location to be redirected
         String site = new String("./");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
-    }
-    else{
+    } else {
 %>
 <%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
 <%@ page import="java.util.HashMap" %>
@@ -81,6 +80,11 @@
                 <span class="sr-only">Error:</span>
                 <strong>Error at create CCC.</strong> Please try again later.
             </div>
+            <div id="erroraddusr" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <strong>Error adding user to CCC.</strong> Please try again later.
+            </div>
 
             <div class="form-group">
                 <label for="sel1">Select CCC to show</label>
@@ -105,7 +109,9 @@
                     <div class="input-group col-md-4">
                         <input type="text" id="nuevoCCC" class="form-control" value="">
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="button" onclick="addCCC()">Añadir CCC</button>
+                            <button class="btn btn-success" type="button" onclick="addCCC()"><span
+                                    class="glyphicon glyphicon-plus" aria-hidden="true"></span> Añadir CCC
+                            </button>
                         </span>
                     </div>
                     <!-- /input-group -->
@@ -120,9 +126,11 @@
                 </div>
             </div>
 
+            <div id="CCCUsradd" class="col-md-4"></div>
 
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

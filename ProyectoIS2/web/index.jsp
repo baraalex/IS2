@@ -5,8 +5,10 @@
         String site = new String("./logged.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
+        System.out.println("logged");
     }
     else{
+        System.out.println("no log");
 %>
 <%--
   Created by IntelliJ IDEA.

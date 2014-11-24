@@ -15,6 +15,9 @@ function cccInfo() {
     $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
         $("#CCCInfo").empty().html(result.split("&&&")[1]);
         $("#deleteCCC").empty().html(result.split("&&&")[2]);
+        console.log(result.split("&&&")[3]);
+        $("#CCCUsradd").empty().html(result.split("&&&")[3]);
+
     });
 }
 
@@ -32,8 +35,8 @@ function deleteUser(user) {
 
 function deleteCCC(nameccc) {
     $.post("Functions.jsp", { action: "DELETECCC", ccc: nameccc}, function () {
+        window.location = "CCC.jsp";
     });
-    window.location = "CCC.jsp";
 }
 
 function addCCC() {
@@ -48,6 +51,20 @@ function addCCC() {
             }
         });
     }
+}
+
+function addusr(CCC) {
+    if ($("#newuserCCC").val() != "" && CCC != null && CCC != "")
+        $.post("Functions.jsp", { action: "ADDUSRCCC", usr: $("#newuserCCC").val(), ccc: CCC}, function (result) {
+            if (result.split("&&&")[1] != "OK") {
+                $("#erroraddusr").css("display", "block");
+            } else {
+                $("#erroraddusr").css("display", "none");
+                window.location = "CCC.jsp";
+            }
+        });
+    else
+        $("#erroraddusr").css("display", "block");
 }
 
 

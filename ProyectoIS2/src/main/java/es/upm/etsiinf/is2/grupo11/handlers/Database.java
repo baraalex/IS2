@@ -243,6 +243,28 @@ public final class Database {
         return cccs;
     }
 
+    public ArrayList<String> getUsers() {
+        ArrayList<String> users = new ArrayList<String>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `usuario`;");
+            while (rs.next()) {
+                String user = rs.getString("Usuario");
+                users.add(user);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+
     public boolean modifyUser(String usr, String pass, String email, int telf, String nombre, int tipo) {
         boolean modif = false;
         String sql = "UPDATE `usuario`" +
@@ -326,12 +348,16 @@ public final class Database {
             if (rs.next()) {
                 PreparedStatement pr = connection
                         .prepareStatement("DELETE FROM `miembros_ccc` WHERE `CCC` LIKE '" + nombre + "';");
+                PreparedStatement pr1 = connection
+                        .prepareStatement("DELETE FROM `pc` WHERE `CCC` LIKE '" + nombre + "';");
                 PreparedStatement pr2 = connection
                         .prepareStatement("DELETE FROM `ccc` WHERE `Nombre` LIKE '" + nombre + "';");
                 pr.execute();
+                pr1.execute();
 
                 pr2.execute();
                 pr.close();
+                pr1.close();
                 pr2.close();
                 crete = true;
             }
@@ -352,7 +378,7 @@ public final class Database {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
-                    .executeQuery("SELECT * FROM `ccc` WHERE `CCC` LIKE '" + ccc + "' AND `Usuario` LIKE '" + user + "';");
+                    .executeQuery("SELECT * FROM `miembros_ccc` WHERE `CCC` LIKE '" + ccc + "' AND `Usuario` LIKE '" + user + "';");
             if (!rs.next()) {
                 PreparedStatement pr = connection
                         .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`)" + " VALUES('" + ccc + "','" + user + "')");
