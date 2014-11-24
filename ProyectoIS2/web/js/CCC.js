@@ -23,20 +23,24 @@ function cccInfo() {
 
 function deleteUser(user) {
     var name = $("#sel1").val();
-    $.post("Functions.jsp", { action: "DELETEUSRCCC", ccc: name, usr: user}, function () {
-    });
+    if(confirm("Quiere eliminar al usuario '"+user+"' del CCC '"+name+"'?")) {
+        $.post("Functions.jsp", { action: "DELETEUSRCCC", ccc: name, usr: user}, function () {
+        });
 
-    $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
-        $("#CCCInfo").empty().html(result.split("&&&")[1]);
-        $("#deleteCCC").empty().html(result.split("&&&")[2]);
+        $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
+            $("#CCCInfo").empty().html(result.split("&&&")[1]);
+            $("#deleteCCC").empty().html(result.split("&&&")[2]);
 
-    });
+        });
+    }
 }
 
 function deleteCCC(nameccc) {
-    $.post("Functions.jsp", { action: "DELETECCC", ccc: nameccc}, function () {
-        window.location = "CCC.jsp";
-    });
+    if (confirm("Quiere eliminar el CCC '" + nameccc + "'?")) {
+        $.post("Functions.jsp", { action: "DELETECCC", ccc: nameccc}, function () {
+            window.location = "CCC.jsp";
+        });
+    }
 }
 
 function addCCC() {
