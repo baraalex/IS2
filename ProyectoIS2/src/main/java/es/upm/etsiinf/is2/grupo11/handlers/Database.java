@@ -157,7 +157,7 @@ public final class Database {
         } catch (SQLException e) {
             e.printStackTrace();
             try {
-                if(!connection.isClosed()) {
+                if (!connection.isClosed()) {
                     connection.close();
                 }
             } catch (SQLException e1) {
@@ -540,8 +540,9 @@ public final class Database {
         return modif;
     }
 
-    public HashMap<String, String> getcccPC(String ccc) {
-        HashMap<String, String> cccs = new HashMap<String, String>();
+    public HashMap<Integer, HashMap<String, String>> getcccPC(String ccc) {
+        HashMap<Integer, HashMap<String, String>> pcs = new HashMap<Integer, HashMap<String, String>>();
+
         try {
             connection = DriverManager.getConnection(url, userName, password);
 
@@ -549,18 +550,21 @@ public final class Database {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `pc` WHERE CCC LIKE '" + ccc + "';");
             while (rs.next()) {
+                HashMap<String, String> pcInfo = new HashMap<String, String>();
                 String Fecha = rs.getString("Fecha");
-                cccs.put("Fecha", Fecha);
+                pcInfo.put("Fecha", Fecha);
                 String descripcion = rs.getString("Descripcion");
-                cccs.put("Descripcion", descripcion);
+                pcInfo.put("Descripcion", descripcion);
                 String motivo = rs.getString("Motivo");
-                cccs.put("Motivo", motivo);
+                pcInfo.put("Motivo", motivo);
                 String usuario = rs.getString("Usuario");
-                cccs.put("Usuario", usuario);
+                pcInfo.put("Usuario", usuario);
                 String estado = rs.getString("Estado");
-                cccs.put("Estado", estado);
+                pcInfo.put("Estado", estado);
                 String historial = rs.getString("Historial");
-                cccs.put("Historial", historial);
+                pcInfo.put("Historial", historial);
+                int id = rs.getInt("ID");
+                pcs.put(id, pcInfo);
             }
             rs.close();
             stmt.close();
@@ -569,11 +573,11 @@ public final class Database {
             e.printStackTrace();
         }
 
-        return cccs;
+        return pcs;
     }
 
-    public HashMap<String, String> getUserPC(String user) {
-        HashMap<String, String> cccs = new HashMap<String, String>();
+    public HashMap<Integer, HashMap<String, String>> getUserPC(String user) {
+        HashMap<Integer, HashMap<String, String>> pcs = new HashMap<Integer, HashMap<String, String>>();
         try {
             connection = DriverManager.getConnection(url, userName, password);
 
@@ -581,18 +585,21 @@ public final class Database {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `pc` WHERE Usuario LIKE '" + user + "';");
             while (rs.next()) {
+                HashMap<String, String> pcInfo = new HashMap<String, String>();
                 String Fecha = rs.getString("Fecha");
-                cccs.put("Fecha", Fecha);
+                pcInfo.put("Fecha", Fecha);
                 String descripcion = rs.getString("Descripcion");
-                cccs.put("Descripcion", descripcion);
+                pcInfo.put("Descripcion", descripcion);
                 String motivo = rs.getString("Motivo");
-                cccs.put("Motivo", motivo);
+                pcInfo.put("Motivo", motivo);
                 String ccc = rs.getString("CCC");
-                cccs.put("CCC", ccc);
+                pcInfo.put("CCC", ccc);
                 String estado = rs.getString("Estado");
-                cccs.put("Estado", estado);
+                pcInfo.put("Estado", estado);
                 String historial = rs.getString("Historial");
-                cccs.put("Historial", historial);
+                pcInfo.put("Historial", historial);
+                int id = rs.getInt("ID");
+                pcs.put(id, pcInfo);
             }
             rs.close();
             stmt.close();
@@ -601,6 +608,6 @@ public final class Database {
             e.printStackTrace();
         }
 
-        return cccs;
+        return pcs;
     }
 }

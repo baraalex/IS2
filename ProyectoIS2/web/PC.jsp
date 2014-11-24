@@ -1,5 +1,3 @@
-<%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
-<%@ page import="java.util.ArrayList" %>
 <%
     HttpSession sesion = request.getSession();
     if (sesion.getAttribute("user") == null) {
@@ -78,12 +76,12 @@
                 <strong>Error at create PC.</strong> Please try again later.
             </div>
             <p>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"
-                                                                    aria-hidden="true"></span>
+                <button type="button" class="btn btn-default" onclick="verPC()"><span
+                        class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                     Ver Peticiones de Cambio
                 </button>
-                <button type="button" class="btn btn-primary" onclick="newPCform()"><span class="glyphicon glyphicon-plus"
-                                                                    aria-hidden="true"></span>
+                <button type="button" class="btn btn-primary" onclick="newPCform()"><span
+                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Nueva Peticion de Cambio
                 </button>
             </p>

@@ -35,3 +35,9 @@ function newPC(form) {
 
 }
 
+function verPC(){
+    $.post("Functions.jsp", { action: "USERPC"}, function (result) {
+        $("#PCs").empty().html(result.split("&&&")[1]);
+    });
+}
+

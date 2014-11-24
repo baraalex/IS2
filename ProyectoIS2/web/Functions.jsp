@@ -1,4 +1,5 @@
 <%@ page import="es.upm.etsiinf.is2.grupo11.enums.AppEnums" %>
+<%@ page import="es.upm.etsiinf.is2.grupo11.enums.PCestados" %>
 <%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
@@ -161,6 +162,58 @@
                 out.println("&&&OK&&&");
             } else
                 out.println("&&&NOTOK&&&");
+            break;
+        case USERPC:
+            out.println("&&&");
+            HashMap<Integer, HashMap<String, String>> userPC =
+                    Database.getInstance().getUserPC((String) request.getSession().getAttribute("user"));
+            out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
+                    "Tus PC</div><div class=\"panel-body\"><ul class=\"list-group\">");
+            for (int i : userPC.keySet()) {
+                String estado = userPC.get(i).get("Estado");
+                if (estado.equals(PCestados.evaluacion.toString())) {
+                    out.println("<li class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+                } else if (estado.equals(PCestados.aceptado.toString())) {
+                    out.println("<li class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+
+                } else if (estado.equals(PCestados.rechazado.toString())) {
+                    out.println("<li class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+
+                }
+                for (String s : userPC.get(i).keySet()) {
+                    out.println("<b>" + s + ": </b>" + userPC.get(i).get(s) + "<br>");
+                }
+
+                out.println(" </li>");
+            }
+            out.println("</ul></div></div></div>");
+            HashMap<String, Boolean> userccc = Database.getInstance().getUserCCCs((String) request.getSession().getAttribute("user"));
+            out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
+                    "PC de CCC que administras</div><div class=\"panel-body\"><ul class=\"list-group\">");
+            for (String s : userccc.keySet())
+                if (userccc.get(s)) {
+                    HashMap<Integer, HashMap<String, String>> cccPC = Database.getInstance().getcccPC(s);
+                    for (int i : cccPC.keySet()) {
+                        String estado = cccPC.get(i).get("Estado");
+                        if (estado.equals(PCestados.evaluacion.toString())) {
+                            out.println("<li class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+                        } else if (estado.equals(PCestados.aceptado.toString())) {
+                            out.println("<li class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+
+                        } else if (estado.equals(PCestados.rechazado.toString())) {
+                            out.println("<li class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+
+                        }
+                        for (String st : cccPC.get(i).keySet()) {
+                            out.println("<b>" + st + ": </b>" + cccPC.get(i).get(st) + "<br>");
+                        }
+
+                        out.println(" </li>");
+                    }
+                }
+            out.println("</ul></div></div></div>");
+
+            out.println("&&&");
             break;
 
 

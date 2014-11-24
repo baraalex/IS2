@@ -17,7 +17,7 @@
     <file path="/style.scss" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1415736973132" ignored="false" />
     <file path="/IndexFunctions.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416675994263" ignored="false" />
     <file path="/a.dummy" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416264995430" ignored="false" />
-    <file path="/Database.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416769134430" ignored="false" />
+    <file path="/Database.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416787191682" ignored="false" />
     <file path="/index.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416173230035" ignored="false" />
     <file path="/Register.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416781161337" ignored="false" />
     <file path="/functions.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416268270782" ignored="false" />
@@ -32,12 +32,12 @@
     <file path="/PCestados.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416780619674" ignored="false" />
     <file path="/logged.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416763379824" ignored="false" />
     <file path="/sessions.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416683656669" ignored="false" />
-    <file path="/AppEnums.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416779136601" ignored="false" />
-    <file path="/Functions.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416780776228" ignored="false" />
+    <file path="/AppEnums.java" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416788043518" ignored="false" />
+    <file path="/Functions.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416788582399" ignored="false" />
     <file path="/CCC.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416763372126" ignored="false" />
     <file path="/CCC.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416745683581" ignored="false" />
-    <file path="/PC.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416779225527" ignored="false" />
-    <file path="/Pc.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416780907000" ignored="false" />
+    <file path="/PC.jsp" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416788690375" ignored="false" />
+    <file path="/Pc.js" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416788641230" ignored="false" />
     <file path="/algo.xml" changelist="1364f8b5-c7e9-43ea-8669-c66cb567cba1" time="1416778217493" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +53,8 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -89,8 +91,6 @@
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -103,11 +103,9 @@
       <file leaf-file-name="Database.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="72" selection-start="4828" selection-end="4838" vertical-scroll-proportion="0.0">
+            <state line="566" column="36" selection-start="22123" selection-end="22123" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="method#Database#0;class#Database#0" expanded="false" />
-                <element signature="method#getInstance#0;class#Database#0" expanded="false" />
-                <element signature="method#setInstance#0;class#Database#0" expanded="false" />
+                <element signature="method#createDB#0;class#Database#0" expanded="false" />
                 <element signature="method#login#0;class#Database#0" expanded="false" />
                 <element signature="method#deleteUser#0;class#Database#0" expanded="false" />
                 <element signature="method#register#0;class#Database#0" expanded="false" />
@@ -121,17 +119,12 @@
                 <element signature="method#getCCCUserss#0;class#Database#0" expanded="false" />
                 <element signature="method#getUserCCCs#0;class#Database#0" expanded="false" />
                 <element signature="method#createPC#0;class#Database#0" expanded="false" />
-                <marker date="1416780098163" expanded="true" signature="1389:1427" placeholder="/*!40100 DEF..." />
+                <element signature="method#modifyPC#0;class#Database#0" expanded="false" />
+                <element signature="e#20978#21012#0" expanded="true" />
+                <element signature="e#22471#22505#0" expanded="true" />
+                <element signature="e#22878#22894#0" expanded="true" />
+                <marker date="1416787234635" expanded="true" signature="1389:1427" placeholder="/*!40100 DEF..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PC.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/PC.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="0" selection-start="4062" selection-end="4062" vertical-scroll-proportion="-16.923077">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -145,10 +138,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PC.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/PC.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="56" selection-start="3742" selection-end="3742" vertical-scroll-proportion="-10.692307">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Functions.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/Functions.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="65" selection-start="7499" selection-end="7499" vertical-scroll-proportion="0.6583924">
+            <state line="211" column="21" selection-start="11522" selection-end="11522" vertical-scroll-proportion="0.81914896">
               <folding />
             </state>
           </provider>
@@ -157,16 +159,7 @@
       <file leaf-file-name="Pc.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/Pc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="25" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/js/register.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="17" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
+            <state line="38" column="45" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,14 +183,14 @@
         <option value="$PROJECT_DIR$/web/logged.jsp" />
         <option value="$PROJECT_DIR$/web/CCC.jsp" />
         <option value="$PROJECT_DIR$/web/algo.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/AppEnums.java" />
-        <option value="$PROJECT_DIR$/web/PC.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java" />
         <option value="$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/PCestados.java" />
-        <option value="$PROJECT_DIR$/web/js/Pc.js" />
-        <option value="$PROJECT_DIR$/web/Functions.jsp" />
         <option value="$PROJECT_DIR$/web/Register.jsp" />
         <option value="$PROJECT_DIR$/web/js/register.js" />
+        <option value="$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java" />
+        <option value="$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/AppEnums.java" />
+        <option value="$PROJECT_DIR$/web/js/Pc.js" />
+        <option value="$PROJECT_DIR$/web/PC.jsp" />
+        <option value="$PROJECT_DIR$/web/Functions.jsp" />
       </list>
     </option>
   </component>
@@ -293,6 +286,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -401,8 +396,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -420,11 +413,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -447,19 +440,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -490,6 +470,19 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -512,6 +505,13 @@
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -531,13 +531,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
@@ -888,13 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/AppEnums.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="14" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/logged.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="52" selection-start="2451" selection-end="2451" vertical-scroll-proportion="-23.692308">
@@ -909,48 +895,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="72" selection-start="4828" selection-end="4838" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#Database#0;class#Database#0" expanded="false" />
-            <element signature="method#getInstance#0;class#Database#0" expanded="false" />
-            <element signature="method#setInstance#0;class#Database#0" expanded="false" />
-            <element signature="method#login#0;class#Database#0" expanded="false" />
-            <element signature="method#deleteUser#0;class#Database#0" expanded="false" />
-            <element signature="method#register#0;class#Database#0" expanded="false" />
-            <element signature="method#getUser#0;class#Database#0" expanded="false" />
-            <element signature="method#modifyUser#0;class#Database#0" expanded="false" />
-            <element signature="method#createCCC#0;class#Database#0" expanded="false" />
-            <element signature="method#deleteCCC#0;class#Database#0" expanded="false" />
-            <element signature="method#addUserCCC#0;class#Database#0" expanded="false" />
-            <element signature="method#deleteUserCCC#0;class#Database#0" expanded="false" />
-            <element signature="method#getCCCs#0;class#Database#0" expanded="false" />
-            <element signature="method#getCCCUserss#0;class#Database#0" expanded="false" />
-            <element signature="method#getUserCCCs#0;class#Database#0" expanded="false" />
-            <element signature="method#createPC#0;class#Database#0" expanded="false" />
-            <marker date="1416780098163" expanded="true" signature="1389:1427" placeholder="/*!40100 DEF..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/PC.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="4062" selection-end="4062" vertical-scroll-proportion="-16.923077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/CCC.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="74" selection-start="2144" selection-end="2154" vertical-scroll-proportion="0.77272725">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/PCestados.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="1" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -964,21 +911,69 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="17" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
+        <state line="22" column="17" selection-start="851" selection-end="851" vertical-scroll-proportion="0.35069445">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/handlers/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="566" column="36" selection-start="22123" selection-end="22123" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#createDB#0;class#Database#0" expanded="false" />
+            <element signature="method#login#0;class#Database#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#Database#0" expanded="false" />
+            <element signature="method#register#0;class#Database#0" expanded="false" />
+            <element signature="method#getUser#0;class#Database#0" expanded="false" />
+            <element signature="method#modifyUser#0;class#Database#0" expanded="false" />
+            <element signature="method#createCCC#0;class#Database#0" expanded="false" />
+            <element signature="method#deleteCCC#0;class#Database#0" expanded="false" />
+            <element signature="method#addUserCCC#0;class#Database#0" expanded="false" />
+            <element signature="method#deleteUserCCC#0;class#Database#0" expanded="false" />
+            <element signature="method#getCCCs#0;class#Database#0" expanded="false" />
+            <element signature="method#getCCCUserss#0;class#Database#0" expanded="false" />
+            <element signature="method#getUserCCCs#0;class#Database#0" expanded="false" />
+            <element signature="method#createPC#0;class#Database#0" expanded="false" />
+            <element signature="method#modifyPC#0;class#Database#0" expanded="false" />
+            <element signature="e#20978#21012#0" expanded="true" />
+            <element signature="e#22471#22505#0" expanded="true" />
+            <element signature="e#22878#22894#0" expanded="true" />
+            <marker date="1416787234635" expanded="true" signature="1389:1427" placeholder="/*!40100 DEF..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/PCestados.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="1" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/Pc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="25" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
+        <state line="38" column="45" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/es/upm/etsiinf/is2/grupo11/enums/AppEnums.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="10" selection-start="369" selection-end="369" vertical-scroll-proportion="0.6197917">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/PC.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="56" selection-start="3742" selection-end="3742" vertical-scroll-proportion="-10.692307">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/Functions.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="65" selection-start="7499" selection-end="7499" vertical-scroll-proportion="0.6583924">
+        <state line="211" column="21" selection-start="11522" selection-end="11522" vertical-scroll-proportion="0.81914896">
           <folding />
         </state>
       </provider>
