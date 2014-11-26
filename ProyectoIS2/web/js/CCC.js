@@ -15,32 +15,64 @@ function cccInfo() {
     $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
         $("#CCCInfo").empty().html(result.split("&&&")[1]);
         $("#deleteCCC").empty().html(result.split("&&&")[2]);
-        console.log(result.split("&&&")[3]);
         $("#CCCUsradd").empty().html(result.split("&&&")[3]);
-
     });
 }
 
 function deleteUser(user) {
     var name = $("#sel1").val();
-    if(confirm("Quiere eliminar al usuario '"+user+"' del CCC '"+name+"'?")) {
-        $.post("Functions.jsp", { action: "DELETEUSRCCC", ccc: name, usr: user}, function () {
-        });
 
-        $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
-            $("#CCCInfo").empty().html(result.split("&&&")[1]);
-            $("#deleteCCC").empty().html(result.split("&&&")[2]);
+    bootbox.dialog({
+        message: "¿Quiere eliminar al usuario '" + user + "' del CCC '" + name + "'?",
+        title: "Borrar usuario",
+        buttons: {
+            success: {
+                label: "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> OK",
+                className: "btn-success",
+                callback: function () {
+                    $.post("Functions.jsp", { action: "DELETEUSRCCC", ccc: name, usr: user}, function () {
+                        $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
+                            $("#CCCInfo").empty().html(result.split("&&&")[1]);
+                            $("#deleteCCC").empty().html(result.split("&&&")[2]);
+                            $("#CCCUsradd").empty().html(result.split("&&&")[3]);
 
-        });
-    }
+                        });
+                    });
+                }
+            },
+            danger: {
+                label: "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Cancel",
+                className: "btn-danger",
+                callback: function () {
+                }
+            }
+        }
+    });
 }
 
 function deleteCCC(nameccc) {
-    if (confirm("Quiere eliminar el CCC '" + nameccc + "'?")) {
-        $.post("Functions.jsp", { action: "DELETECCC", ccc: nameccc}, function () {
-            window.location = "CCC.jsp";
-        });
-    }
+
+    bootbox.dialog({
+        message: "¿Quiere eliminar ael CCC '" + nameccc + "'?",
+        title: "Borrar CCC",
+        buttons: {
+            success: {
+                label: "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> OK",
+                className: "btn-success",
+                callback: function () {
+                    $.post("Functions.jsp", { action: "DELETECCC", ccc: nameccc}, function () {
+                        window.location = "CCC.jsp";
+                    });
+                }
+            },
+            danger: {
+                label: "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Cancel",
+                className: "btn-danger",
+                callback: function () {
+                }
+            }
+        }
+    });
 }
 
 function addCCC() {
@@ -57,18 +89,20 @@ function addCCC() {
     }
 }
 
-function addusr(CCC) {
-    if ($("#newuserCCC").val() != "" && CCC != null && CCC != "")
-        $.post("Functions.jsp", { action: "ADDUSRCCC", usr: $("#newuserCCC").val(), ccc: CCC}, function (result) {
+function addusr(name) {
+    if ($("#newuserCCC").val() != "" && name != null && name != "")
+        $.post("Functions.jsp", { action: "ADDUSRCCC", usr: $("#newuserCCC").val(), ccc: name}, function (result) {
             if (result.split("&&&")[1] != "OK") {
                 $("#erroraddusr").css("display", "block");
             } else {
                 $("#erroraddusr").css("display", "none");
-                window.location = "CCC.jsp";
+                $.post("Functions.jsp", { action: "CCC", ccc: name}, function (result) {
+                    $("#CCCInfo").empty().html(result.split("&&&")[1]);
+                    $("#deleteCCC").empty().html(result.split("&&&")[2]);
+                    $("#CCCUsradd").empty().html(result.split("&&&")[3]);
+                });
             }
         });
     else
         $("#erroraddusr").css("display", "block");
 }
-
-

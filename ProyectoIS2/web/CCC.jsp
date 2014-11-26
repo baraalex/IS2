@@ -28,6 +28,7 @@
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootbox.js"></script>
     <script type="text/javascript" src="js/CCC.js"></script>
 
 </head>

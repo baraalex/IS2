@@ -12,10 +12,8 @@ function exit() {
 }
 
 $(document).ready(function () {
-    $.post("Functions.jsp", { action: "CCSINFO"}, function (result) {
-        $("#cccs").empty().html(result.split("&&&")[1]);
-    });
-    $.post("Functions.jsp", { action: "INFO"}, function (result) {
-        $("#personal").empty().html(result.split("&&&")[1]);
+    $.post("Functions.jsp", { action: "INICIO"}, function (resultado) {
+        $("#personal").empty().html(resultado.split("&&&")[1]);
+        $("#cccs").empty().html(resultado.split("&&&")[2]);
     });
 });

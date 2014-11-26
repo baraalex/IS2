@@ -22,7 +22,7 @@
                     request.getSession().setAttribute("user", usr);
                     out.println("&&&OK&&&");
                 } else
-                    out.println("&&&NOTOK&&&");
+                    out.println("&&&NOTOK&&&"); 
             } else
                 out.println("&&&NOTOK&&&");
             break;
@@ -41,26 +41,10 @@
         case EXIT:
             request.getSession().setAttribute("user", null);
             break;
-        case CCSINFO:
+        case INICIO:
             String user = (String) request.getSession().getAttribute("user");
-            HashMap<String, Boolean> info = Database.getInstance().getUserCCCs(user);
-            out.println("&&&");
-            out.println("<ul class=\"list-group\" style=\"margin-bottom: 0;\">");
-            for (String s : info.keySet()) {
-                if (info.get(s))
-                    out.println("<li class=\"list-group-item list-group-item-info\">" + s + " <b style=\"font-size: small;\">(Administrador)</b></li>");
-                else
-                    out.println("<li class=\"list-group-item\">" + s + "</li>");
 
-            }
-            out.println("</ul>");
-            out.println("&&&");
-
-            break;
-        case INFO:
-            String user2 = (String) request.getSession().getAttribute("user");
-
-            HashMap<String, String> infouser = Database.getInstance().getUser(user2);
+            HashMap<String, String> infouser = Database.getInstance().getUser(user);
             out.println("&&&");
             if (infouser.get("Tipo").equals("1"))
                 out.println("<h1 style=\"padding-bottom: 5%;\"><span class=\"label label-danger\">Administrador</span></h1>");
@@ -75,6 +59,18 @@
                             "    </div><!-- /input-group -->");
                 }
             }
+            out.println("&&&");
+
+            HashMap<String, Boolean> info = Database.getInstance().getUserCCCs(user);
+            out.println("<ul class=\"list-group\" style=\"margin-bottom: 0;\">");
+            for (String s : info.keySet()) {
+                if (info.get(s))
+                    out.println("<li class=\"list-group-item list-group-item-info\">" + s + " <b style=\"font-size: small;\">(Administrador)</b></li>");
+                else
+                    out.println("<li class=\"list-group-item\">" + s + "</li>");
+
+            }
+            out.println("</ul>");
             out.println("&&&");
             break;
         case CCC:
