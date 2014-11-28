@@ -1,13 +1,12 @@
 <%
     HttpSession sesion = request.getSession();
-    if(sesion.getAttribute("user")!=null){
+    if (sesion.getAttribute("user") != null) {
         // New location to be redirected
         String site = new String("./logged.jsp");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
         System.out.println("logged");
-    }
-    else{
+    } else {
         System.out.println("no log");
 %>
 <%--
@@ -43,7 +42,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title">SEGECA Login Page</h3>
+                <h1 style="text-align: center;">SEGECA Login Page</h1>
             </div>
             <div class="panel-body">
                 <div class="input-group">

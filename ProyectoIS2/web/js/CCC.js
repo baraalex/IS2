@@ -53,7 +53,7 @@ function deleteUser(user) {
 function deleteCCC(nameccc) {
 
     bootbox.dialog({
-        message: "¿Quiere eliminar ael CCC '" + nameccc + "'?",
+        message: "¿Quiere eliminar el CCC '" + nameccc + "'?",
         title: "Borrar CCC",
         buttons: {
             success: {

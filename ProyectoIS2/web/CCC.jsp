@@ -90,22 +90,27 @@
             <div class="form-group">
                 <label for="sel1">Select CCC to show</label>
 
-                <div style="display: flex;">
-                    <select class="form-control col-md-4" id="sel1" style="width: inherit;" onchange="cccInfo()">
-                        <option value=""></option>
+                <div>
+                    <div class="col-md-6">
 
-                        <%
-                            HashMap<String, Boolean> ccc = Database.getInstance().getUserCCCs(user);
-                            for (String s : ccc.keySet()) {
-                        %>
-                        <option value="<%=s%>"><%=s%>
-                        </option>
-                        <%
-                            }
-                        %>
-                    </select>
+                        <select class="form-control col-md-3" id="sel1" style="width: inherit;" onchange="cccInfo()">
+                            <option value=""></option>
 
-                    <div class="col-md-4" id="deleteCCC"></div>
+                            <%
+                                HashMap<String, Boolean> ccc = Database.getInstance().getUserCCCs(user);
+                                for (String s : ccc.keySet()) {
+                            %>
+                            <option value="<%=s%>"><%=s%>
+                            </option>
+                            <%
+                                }
+                            %>
+                        </select>
+
+                        <div class="col-md-3" id="deleteCCC">
+
+                        </div>
+                    </div>
 
                     <div class="input-group col-md-4">
                         <input type="text" id="nuevoCCC" class="form-control" value="">

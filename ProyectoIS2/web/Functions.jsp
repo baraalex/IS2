@@ -15,7 +15,7 @@
     AppEnums action = AppEnums.valueOf(request.getParameter("action"));
     switch (action) {
         case LOGIN:
-            String usr = request.getParameter("username");
+            String usr = request.getParameter("username").toLowerCase();
             String pass = request.getParameter("password");
             if (usr != null && pass != null && usr.length() > 0 && pass.length() > 0) {
                 if (Database.getInstance().login(usr, pass)) {
