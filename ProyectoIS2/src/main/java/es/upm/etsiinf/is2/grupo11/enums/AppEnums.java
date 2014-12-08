@@ -19,5 +19,7 @@ public enum AppEnums {
     ADDCCC,
     ADDPCFORM,
     ADDPC,
-    USERPC
+    USERPC,
+    PCINFO,
+    MODIFYPCESTADO
 }

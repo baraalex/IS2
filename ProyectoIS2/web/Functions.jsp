@@ -1,6 +1,8 @@
 <%@ page import="es.upm.etsiinf.is2.grupo11.enums.AppEnums" %>
 <%@ page import="es.upm.etsiinf.is2.grupo11.enums.PCestados" %>
 <%@ page import="es.upm.etsiinf.is2.grupo11.handlers.Database" %>
+<%@ page import="java.security.MessageDigest" %>
+<%@ page import="java.security.NoSuchAlgorithmException" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%--
@@ -17,6 +19,21 @@
         case LOGIN:
             String usr = request.getParameter("username").toLowerCase();
             String pass = request.getParameter("password");
+
+
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] array = md.digest(pass.getBytes("UTF-8"));
+
+                StringBuilder sb = new StringBuilder();
+                for (byte anArray : array) {
+                    sb.append(Integer.toHexString((anArray & 0xFF) | 0x100).substring(1, 3));
+                }
+                pass = sb.toString();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+
             if (usr != null && pass != null && usr.length() > 0 && pass.length() > 0) {
                 if (Database.getInstance().login(usr, pass)) {
                     request.getSession().setAttribute("user", usr);
@@ -27,11 +44,24 @@
                 out.println("&&&NOTOK&&&");
             break;
         case REGISTRO:
-            String usr1 = request.getParameter("username");
+            String usr1 = request.getParameter("username").toLowerCase();
             String pass1 = request.getParameter("password");
             String email = request.getParameter("email");
             String nombre = request.getParameter("nombre");
             int telf = Integer.valueOf(request.getParameter("telf"));
+
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] array = md.digest(pass1.getBytes("UTF-8"));
+
+                StringBuilder sb = new StringBuilder();
+                for (byte anArray : array) {
+                    sb.append(Integer.toHexString((anArray & 0xFF) | 0x100).substring(1, 3));
+                }
+                pass1 = sb.toString();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
 
             if (Database.getInstance().register(usr1, pass1, email, telf, nombre))
                 out.println("&&&OK&&&");
@@ -121,14 +151,17 @@
                 out.println("<div><div class=\"radio\"><label>" +
                         "<input type=\"radio\" name=\"opciones\" id=\"opciones_1\" value=\"Usuario\" checked>" +
                         "Usuario Normal</label></div>");
+
                 if (!users.containsValue("Presidente"))
                     out.println("<div class=\"radio\"><label>" +
                             "<input type=\"radio\" name=\"opciones\" id=\"opciones_2\" value=\"Presidente\">" +
                             "Presidente</label></div>");
+
                 if (!users.containsValue("Secretario"))
                     out.println("<div class=\"radio\"><label>" +
                             "<input type=\"radio\" name=\"opciones\" id=\"opciones_3\" value=\"Secretario\">" +
                             "Secretario</label></div></div>");
+
                 out.println("</div>");
             } else {
                 out.println("<div></div> ");
@@ -203,50 +236,59 @@
             HashMap<Integer, HashMap<String, String>> userPC =
                     Database.getInstance().getUserPC((String) request.getSession().getAttribute("user"));
             out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
-                    "Tus PC</div><div class=\"panel-body\"><ul class=\"list-group\">");
+                    "Tus PC</div><div class=\"panel-body\" style=\"overflow: scroll;height: 70%;\"><div class=\"list-group\">");
             for (int i : userPC.keySet()) {
                 String estado = userPC.get(i).get("Estado");
                 if (estado.equals(PCestados.evaluacion.toString())) {
-                    out.println("<li class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
                 } else if (estado.equals(PCestados.aceptado.toString())) {
-                    out.println("<li class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
 
                 } else if (estado.equals(PCestados.rechazado.toString())) {
-                    out.println("<li class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
 
                 }
+                out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + i + "</span><br>");
                 for (String s : userPC.get(i).keySet()) {
-                    out.println("<b>" + s + ": </b>" + userPC.get(i).get(s) + "<br>");
+                    if (!s.equals("Historial"))
+                        out.println("<b>" + s + ": </b>" + userPC.get(i).get(s) + "<br>");
+                    else
+                        out.println("<b>" + s + ": </b>" + userPC.get(i).get(s).replaceAll("&&&", "->") + "<br>");
                 }
 
-                out.println(" </li>");
+                out.println(" </a>");
             }
-            out.println("</ul></div></div></div>");
+            out.println("</div></div></div></div>");
             HashMap<String, Boolean> userccc = Database.getInstance().getUserCCCs((String) request.getSession().getAttribute("user"));
             out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
-                    "PC de CCC que administras</div><div class=\"panel-body\"><ul class=\"list-group\">");
+                    "PC de CCC que administras</div><div class=\"panel-body\" style=\"overflow: scroll;height: 70%;\"><div class=\"list-group\">");
             for (String s : userccc.keySet())
                 if (userccc.get(s)) {
                     HashMap<Integer, HashMap<String, String>> cccPC = Database.getInstance().getcccPC(s);
                     for (int i : cccPC.keySet()) {
                         String estado = cccPC.get(i).get("Estado");
                         if (estado.equals(PCestados.evaluacion.toString())) {
-                            out.println("<li class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+                            out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\" onclick=\"InfoPc('" + i + "')\">");
                         } else if (estado.equals(PCestados.aceptado.toString())) {
-                            out.println("<li class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+                            out.println("<a class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
 
                         } else if (estado.equals(PCestados.rechazado.toString())) {
-                            out.println("<li class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+                            out.println("<a class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
 
                         }
+                        out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + i + "</span><br>");
                         for (String st : cccPC.get(i).keySet()) {
-                            out.println("<b>" + st + ": </b>" + cccPC.get(i).get(st) + "<br>");
+                            if (!st.equals("Historial"))
+                                out.println("<b>" + st + ": </b>" + cccPC.get(i).get(st) + "<br>");
+                            else
+                                out.println("<b>" + st + ": </b>" + cccPC.get(i).get(st).replaceAll("&&&", "->") +
+                                        "<br>");
                         }
 
-                        out.println(" </li>");
+                        out.println(" </a>");
                     }
                 }
-            out.println("</ul></div></div></div>");
+            out.println("</div></div></div></div>");
 
             out.println("&&&");
             break;
@@ -263,6 +305,44 @@
 
             break;
 
+        case PCINFO:
+            out.println("&&&");
+            String id = request.getParameter("id");
 
+            HashMap<String, String> info2 = Database.getInstance().getPC(id);
+            out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
+                    "Informacion de la PC</div><div class=\"panel-body\"><div class=\"list-group\">");
+            out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+            out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + id + "</span><br>");
+            for (String st : info2.keySet()) {
+                out.println("<b>" + st + ": </b>" + info2.get(st) + "<br>");
+            }
+            out.println(" </a>");
+            out.println("</div></div></div></div>");
+
+            out.println("<div class=\"radio\"><label>" +
+                    "<input type=\"radio\" name=\"estado\" id=\"opciones_2\" value=\"" + PCestados.aceptado + "\" checked>" +
+                    "Aceptado</label></div>");
+
+            out.println("<div class=\"radio\"><label>" +
+                    "<input type=\"radio\" name=\"estado\" id=\"opciones_3\" value=\"" + PCestados.rechazado + "\">" +
+                    "Rechazado</label></div></div>");
+
+            out.println("</div>");
+
+            out.println("<button type=\"button\" class=\"btn btn-default\" onclick=\"modificarEstadoPc('" + id +
+                    "')\">Cambiar Estado</button>");
+
+
+            out.println("&&&");
+
+            break;
+
+        case MODIFYPCESTADO:
+            String id2 = request.getParameter("id");
+            PCestados estado = PCestados.valueOf(request.getParameter("estado"));
+            System.out.println(id2 + ": " + estado);
+            Database.getInstance().modifyPC(Integer.valueOf(id2), estado);
+            break;
     }
 %>

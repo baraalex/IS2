@@ -2,6 +2,9 @@ package es.upm.etsiinf.is2.grupo11.handlers;
 
 import es.upm.etsiinf.is2.grupo11.enums.PCestados;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +24,25 @@ public final class Database {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             createDB();
-            register("admin", "admin", "admin@admin.es", 123456789, "Administrador");
+
+
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] array = md.digest("admin".getBytes("UTF-8"));
+
+                StringBuilder sb = new StringBuilder();
+                for (byte anArray : array) {
+                    sb.append(Integer.toHexString((anArray & 0xFF) | 0x100).substring(1, 3));
+                }
+                String pass = sb.toString();
+                register("admin", pass, "admin@admin.es", 123456789, "Administrador");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+
             modifyUser("admin", null, null, 0, null, 1);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -528,7 +549,7 @@ public final class Database {
         return crete;
     }
 
-    public boolean modifyPC(int id, PCestados nombre) {
+    public boolean modifyPC(int id, PCestados estado) {
         boolean modif = false;
         String estados;
         try {
@@ -538,10 +559,10 @@ public final class Database {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `pc` WHERE `ID` LIKE '" + id + "';");
             if (rs.next()) {
-                estados = rs.getString("`Historial`");
-                estados += "&&&" + estados;
-                String sql = "UPDATE `pc` SET `Estado`='" + nombre + "', `Historial`='" + estados + "'     WHERE `ID`" +
-                        " LIKE '" + id + "';";
+                estados = rs.getString("Historial");
+                estados += "&&&" + estado.toString();
+                String sql = "UPDATE `pc` SET `Estado`='" + estado.toString() + "', " +
+                        "`Historial`='" + estados + "' WHERE `ID` LIKE '" + id + "';";
                 PreparedStatement pr = connection
                         .prepareStatement(sql);
                 pr.execute();
@@ -628,5 +649,40 @@ public final class Database {
         }
 
         return pcs;
+    }
+
+    public HashMap<String, String> getPC(String id) {
+        HashMap<String, String> pcInfo = new HashMap<String, String>();
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `pc` WHERE `ID` LIKE '" + id + "';");
+            while (rs.next()) {
+
+                String Fecha = rs.getString("Fecha");
+                pcInfo.put("Fecha", Fecha);
+                String descripcion = rs.getString("Descripcion");
+                pcInfo.put("Descripcion", descripcion);
+                String motivo = rs.getString("Motivo");
+                pcInfo.put("Motivo", motivo);
+                String usuario = rs.getString("Usuario");
+                pcInfo.put("Usuario", usuario);
+                String ccc = rs.getString("CCC");
+                pcInfo.put("CCC", ccc);
+                String estado = rs.getString("Estado");
+                pcInfo.put("Estado", estado);
+                String historial = rs.getString("Historial");
+                pcInfo.put("Historial", historial);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pcInfo;
     }
 }

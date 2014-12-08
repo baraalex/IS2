@@ -49,8 +49,8 @@
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input type="text" id="usrname" name="username" class="form-control" placeholder="Username"
                            required="" <%
-                        if(request.getParameter("userName")!=null)
-                            %> value="<%=request.getParameter("userName")%>" <%
+                        if(request.getParameter("userName")!=null){
+                            %> value="<%=request.getParameter("userName").toLowerCase()%>" <%}
                         %>>
                 </div>
 

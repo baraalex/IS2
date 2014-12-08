@@ -94,12 +94,9 @@ function addusr(name) {
         var radios = document.getElementsByName('opciones');
         var usrrol = "";
 
-        for (var i = 0, length = radios.length ; i < length && usrrol == ""; i++) {
+        for (var i = 0, length = radios.length; i < length && usrrol == ""; i++) {
             if (radios[i].checked) {
-                // do whatever you want with the checked radio
-//                alert(radios[i].value);
                 usrrol = radios[i].value;
-                // only one radio can be logically checked, don't check the rest
                 break;
             }
         }

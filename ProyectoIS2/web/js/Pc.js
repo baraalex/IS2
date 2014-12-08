@@ -35,9 +35,34 @@ function newPC(form) {
 
 }
 
-function verPC(){
+function verPC() {
     $.post("Functions.jsp", { action: "USERPC"}, function (result) {
         $("#PCs").empty().html(result.split("&&&")[1]);
     });
 }
+
+function InfoPc(ID) {
+    $.post("Functions.jsp", { action: "PCINFO", id: ID}, function (result) {
+        $("#PCs").empty().html(result.split("&&&")[1]);
+    });
+}
+
+function modificarEstadoPc(ID) {
+    var radios = document.getElementsByName('estado');
+    var estate = "";
+
+    for (var i = 0, length = radios.length; i < length && estate == ""; i++) {
+        if (radios[i].checked) {
+            estate = radios[i].value;
+            break;
+        }
+    }
+    $.post("Functions.jsp", { action: "MODIFYPCESTADO", id: ID, estado: estate}, function (result) {
+        verPC();
+    });
+}
+
+$(document).ready(function () {
+    verPC();
+});
 
