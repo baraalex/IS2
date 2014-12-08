@@ -22,7 +22,7 @@
                     request.getSession().setAttribute("user", usr);
                     out.println("&&&OK&&&");
                 } else
-                    out.println("&&&NOTOK&&&"); 
+                    out.println("&&&NOTOK&&&");
             } else
                 out.println("&&&NOTOK&&&");
             break;
@@ -75,35 +75,38 @@
             break;
         case CCC:
             String ccc = request.getParameter("ccc");
-            HashMap<String, Boolean> users = Database.getInstance().getCCCUserss(ccc);
+            HashMap<String, String> users = Database.getInstance().getCCCUserss(ccc);
             out.println("&&&");
             String user3 = (String) request.getSession().getAttribute("user");
 
             for (String s : users.keySet()) {
                 out.println("<div class=\"input-group\">");
-                if (users.get(s))
+                if (users.get(s).equals("Administrador"))
                     out.println("<span class=\"label label-warning form-control\" style=\"font-size: large;\">" + s +
                             " <b style=\"font-size: small;\">(Administrador)</b></span><span class=\"input-group-addon\"></span>");
                 else {
-                    if (users.get(user3))
-                        out.println("<span class=\"label label-default form-control\" style=\"font-size: large;\">" + s +
-                                "</span>" + "<span class=\"input-group-btn\">\n" +
+                    out.println("<span class=\"label label-default form-control\" style=\"font-size: large;\">" + s);
+                    if (!users.get(s).equals("Usuario"))
+                        out.println(" (" + users.get(s) + ")");
+                    out.println("</span>");
+
+                    if (users.get(user3).equals("Administrador"))
+                        out.println("<span class=\"input-group-btn\">" +
                                 "<button class=\"btn btn-default\" type=\"button\" onclick=\"deleteUser('" + s + "')\">Borrar del CCC</button>" +
                                 "</span>");
                     else
-                        out.println("<span class=\"label label-default form-control\" style=\"font-size: large;\">" + s +
-                                "</span><span class=\"input-group-addon\"></span>");
+                        out.println("<span class=\"input-group-addon\"></span>");
                 }
                 out.println("</div>");
             }
             out.println("&&&");
 
-            if (!ccc.equals("") && users.get(user3)) {
+            if (!ccc.equals("") && users.get(user3).equals("Administrador")) {
                 out.println("<button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteCCC('" + ccc +
                         "')\">Borrar CCC</button>");
                 out.println("&&&");
                 out.println("<div class=\"input-group\">" +
-                        "<select name=\"newuserCCC\" class=\"form-control\" id=\"newuserCCC\">" +
+                        "<div><select name=\"newuserCCC\" class=\"form-control\" id=\"newuserCCC\">" +
                         "<option value=\"\"></option>");
                 ArrayList<String> userstoadd = Database.getInstance().getUsers();
                 for (String s : userstoadd) {
@@ -115,6 +118,18 @@
                         "onclick=\"addusr('" + ccc + "')\">" +
                         "<span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> Añadir Usuario CCC</button>" +
                         "</span></div>");
+                out.println("<div><div class=\"radio\"><label>" +
+                        "<input type=\"radio\" name=\"opciones\" id=\"opciones_1\" value=\"Usuario\" checked>" +
+                        "Usuario Normal</label></div>");
+                if (!users.containsValue("Presidente"))
+                    out.println("<div class=\"radio\"><label>" +
+                            "<input type=\"radio\" name=\"opciones\" id=\"opciones_2\" value=\"Presidente\">" +
+                            "Presidente</label></div>");
+                if (!users.containsValue("Secretario"))
+                    out.println("<div class=\"radio\"><label>" +
+                            "<input type=\"radio\" name=\"opciones\" id=\"opciones_3\" value=\"Secretario\">" +
+                            "Secretario</label></div></div>");
+                out.println("</div>");
             } else {
                 out.println("<div></div> ");
                 out.println("&&&");
@@ -238,8 +253,10 @@
         case ADDUSRCCC:
             String addduserccc = request.getParameter("usr");
             String ccctoadd = request.getParameter("ccc");
+            String roltoadd = request.getParameter("rol");
+            System.out.println("Rol: " + roltoadd);
             System.out.println("ccc: " + ccctoadd);
-            if (!Database.getInstance().addUserCCC(ccctoadd, addduserccc))
+            if (!Database.getInstance().addUserCCC(ccctoadd, addduserccc, roltoadd))
                 out.println("&&&NOTOK&&&");
             else
                 out.println("&&&OK&&&");

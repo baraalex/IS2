@@ -90,8 +90,21 @@ function addCCC() {
 }
 
 function addusr(name) {
-    if ($("#newuserCCC").val() != "" && name != null && name != "")
-        $.post("Functions.jsp", { action: "ADDUSRCCC", usr: $("#newuserCCC").val(), ccc: name}, function (result) {
+    if ($("#newuserCCC").val() != "" && name != null && name != "") {
+        var radios = document.getElementsByName('opciones');
+        var usrrol = "";
+
+        for (var i = 0, length = radios.length ; i < length && usrrol == ""; i++) {
+            if (radios[i].checked) {
+                // do whatever you want with the checked radio
+//                alert(radios[i].value);
+                usrrol = radios[i].value;
+                // only one radio can be logically checked, don't check the rest
+                break;
+            }
+        }
+
+        $.post("Functions.jsp", { action: "ADDUSRCCC", usr: $("#newuserCCC").val(), ccc: name, rol: usrrol}, function (result) {
             if (result.split("&&&")[1] != "OK") {
                 $("#erroraddusr").css("display", "block");
             } else {
@@ -103,6 +116,6 @@ function addusr(name) {
                 });
             }
         });
-    else
+    } else
         $("#erroraddusr").css("display", "block");
 }

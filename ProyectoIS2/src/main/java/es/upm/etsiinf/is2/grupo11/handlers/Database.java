@@ -77,7 +77,7 @@ public final class Database {
                     "  `Admin` varchar(45) NOT NULL," +
                     "  PRIMARY KEY (`Nombre`)," +
                     "  UNIQUE KEY `Nombre_UNIQUE` (`Nombre`)," +
-                    "  KEY `Admin_idx` (`Admin`),\n" +
+                    "  KEY `Admin_idx` (`Admin`)," +
                     "  CONSTRAINT `Admin` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`)" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
@@ -91,11 +91,12 @@ public final class Database {
             String miembrosCCC = "CREATE TABLE IF NOT EXISTS `miembros_ccc` (" +
                     "  `CCC` varchar(200) NOT NULL," +
                     "  `Usuario` varchar(45) NOT NULL," +
+                    "  `Rol` varchar(45) NOT NULL DEFAULT 'Usuario'," +
                     "  PRIMARY KEY (`CCC`,`Usuario`)," +
                     "  KEY `Usuario_idx` (`Usuario`)," +
                     "  CONSTRAINT `CCC` FOREIGN KEY (`CCC`) REFERENCES `ccc` (`Nombre`)," +
                     "  CONSTRAINT `Usuario` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`Usuario`)" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n";
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
             String pC = "CREATE TABLE IF NOT EXISTS `pc` (" +
                     "  `ID` int(11) NOT NULL AUTO_INCREMENT," +
@@ -322,7 +323,9 @@ public final class Database {
                 pr.close();
 
                 pr = connection
-                        .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`)" + " VALUES('" + nombre + "','" + admin + "')");
+                        .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`," +
+                                "`Rol`)" + " VALUES('" + nombre + "','" + admin + "','" + "Administrador" + "')");
+
                 pr.execute();
                 pr.close();
                 crete = true;
@@ -371,7 +374,7 @@ public final class Database {
         return crete;
     }
 
-    public boolean addUserCCC(String ccc, String user) {
+    public boolean addUserCCC(String ccc, String user, String Rol) {
         boolean added = true;
         try {
             connection = DriverManager.getConnection(url, userName, password);
@@ -381,7 +384,8 @@ public final class Database {
                     .executeQuery("SELECT * FROM `miembros_ccc` WHERE `CCC` LIKE '" + ccc + "' AND `Usuario` LIKE '" + user + "';");
             if (!rs.next()) {
                 PreparedStatement pr = connection
-                        .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`)" + " VALUES('" + ccc + "','" + user + "')");
+                        .prepareStatement("INSERT INTO `miembros_ccc` (`CCC`, `Usuario`," +
+                                "`Rol`)" + " VALUES('" + ccc + "','" + user + "','" + Rol + "')");
                 pr.execute();
                 pr.close();
                 added = true;
@@ -443,31 +447,20 @@ public final class Database {
         return cccs;
     }
 
-    public HashMap<String, Boolean> getCCCUserss(String CCC) {
-        HashMap<String, Boolean> cccs = new HashMap<String, Boolean>();
+    public HashMap<String, String> getCCCUserss(String CCC) {
+        HashMap<String, String> cccs = new HashMap<String, String>();
         try {
             connection = DriverManager.getConnection(url, userName, password);
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM `miembros_ccc` WHERE `CCC` LIKE '" + CCC + "';");
-            Statement stmt2 = connection.createStatement();
-            ResultSet rs2 = null;
+
             while (rs.next()) {
                 String nombre = rs.getString("Usuario");
-                boolean admin = false;
-                rs2 = stmt2
-                        .executeQuery("SELECT * FROM `ccc` WHERE `Nombre` LIKE '" + CCC + "';");
-                if (rs2.next()) {
-                    admin = rs2.getString("Admin").equals(nombre);
-                }
+                String admin = rs.getString("Rol");
                 cccs.put(nombre, admin);
             }
-
-            if (rs2 != null) {
-                rs2.close();
-            }
-            stmt2.close();
 
             rs.close();
             stmt.close();
