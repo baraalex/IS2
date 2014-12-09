@@ -25,7 +25,6 @@ public final class Database {
             Class.forName("org.mariadb.jdbc.Driver");
             createDB();
 
-
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 byte[] array = md.digest("admin".getBytes("UTF-8"));
@@ -42,12 +41,10 @@ public final class Database {
                 e.printStackTrace();
             }
 
-
             modifyUser("admin", null, null, 0, null, 1);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static synchronized Database getInstance() {
@@ -181,9 +178,11 @@ public final class Database {
             try {
                 if (!connection.isClosed()) {
                     connection.close();
+                    return ret;
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
+                return ret;
             }
         }
         return ret;
@@ -549,7 +548,7 @@ public final class Database {
         return crete;
     }
 
-    public boolean modifyPC(int id, PCestados estado) {
+    public boolean modifyPCEstado(int id, PCestados estado) {
         boolean modif = false;
         String estados;
         try {
@@ -579,6 +578,42 @@ public final class Database {
 
         return modif;
     }
+
+
+    public boolean modifyPC(int id, String motivo, String descripcion) {
+        boolean modif = false;
+        String sql = "UPDATE `pc` SET ";
+        if (motivo != null && !motivo.equals(""))
+            sql += "`Motivo`='" + motivo + "',";
+        if (descripcion != null && !descripcion.equals(""))
+            sql += "`Descripcion`='" + descripcion + "',";
+        if (sql.endsWith(","))
+            sql = sql.substring(0, sql.lastIndexOf(","));
+        sql += " WHERE `ID` LIKE '" + id + "';";
+        try {
+            connection = DriverManager.getConnection(url, userName, password);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM `pc` WHERE `ID` LIKE '" + id + "';");
+            if (rs.next()) {
+                PreparedStatement pr = connection
+                        .prepareStatement(sql);
+                pr.execute();
+                modif = true;
+                pr.close();
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return modif;
+    }
+
 
     public HashMap<Integer, HashMap<String, String>> getcccPC(String ccc) {
         HashMap<Integer, HashMap<String, String>> pcs = new HashMap<Integer, HashMap<String, String>>();

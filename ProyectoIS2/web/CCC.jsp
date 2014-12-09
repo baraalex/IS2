@@ -128,11 +128,11 @@
             <div class="col-sm-6">
                 <div class="panel panel-default" style="padding-top: 0;">
                     <div class="panel-heading">Usuarios del CCC seleccionado</div>
-                    <div id="CCCInfo" style="overflow: scroll;max-height: 70%;"></div>
+                    <div id="CCCInfo" style=overflow: auto;max-height: 70%;"></div>
                 </div>
             </div>
 
-            <div id="CCCUsradd" class="col-md-4"></div>
+            <div id="CCCUsradd" class="col-sm-6"></div>
 
         </div>
     </div>

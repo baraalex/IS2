@@ -135,8 +135,8 @@
                 out.println("<button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteCCC('" + ccc +
                         "')\">Borrar CCC</button>");
                 out.println("&&&");
-                out.println("<div class=\"input-group\">" +
-                        "<div><select name=\"newuserCCC\" class=\"form-control\" id=\"newuserCCC\">" +
+                out.println("<div class=\"input-group\" style=\"width: 100%;\">" +
+                        "<div><select name=\"newuserCCC\" class=\"form-control\" id=\"newuserCCC\" style=\"width: initial;\">" +
                         "<option value=\"\"></option>");
                 ArrayList<String> userstoadd = Database.getInstance().getUsers();
                 for (String s : userstoadd) {
@@ -204,11 +204,11 @@
                     "name=\"motivo\" class=\"form-control\" placeholder=\"Motivo de la Peticion de cambio\" " +
                     "required=\"\" value=\"\" maxlength=\"2000\"></textarea></div>" +
                     "<div class=\"input-group\" style=\"padding-top: 1%\">" +
-                    "<select name=\"ccc\" class=\"form-control\" id=\"ccc\" style=\"width: inherit;\">" +
+                    "<select name=\"ccc\" class=\"form-control\" id=\"ccc\" style=\"width: initial;\">" +
                     "<option value=\"\"></option>";
 
             String b = "</select></div><div style=\"padding-top: 2%\">" +
-                    "<input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"Register\">\n" +
+                    "<input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"AddPC\">\n" +
                     "</div></div></div></form>";
             out.println("&&&");
             out.println(a);
@@ -236,16 +236,16 @@
             HashMap<Integer, HashMap<String, String>> userPC =
                     Database.getInstance().getUserPC((String) request.getSession().getAttribute("user"));
             out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
-                    "Tus PC</div><div class=\"panel-body\" style=\"overflow: scroll;height: 70%;\"><div class=\"list-group\">");
+                    "Tus PC</div><div class=\"panel-body\" style=\"overflow: auto;height: 70%;\"><div class=\"list-group\">");
             for (int i : userPC.keySet()) {
                 String estado = userPC.get(i).get("Estado");
                 if (estado.equals(PCestados.evaluacion.toString())) {
-                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000;overflow: auto;\" onclick=\"InfoPc('" + i + "')\">");
                 } else if (estado.equals(PCestados.aceptado.toString())) {
-                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+                    out.println("<a class=\"list-group-item list-group-item-success\" style=\"color:#000000;overflow: auto;\">");
 
                 } else if (estado.equals(PCestados.rechazado.toString())) {
-                    out.println("<a href=\"#\" class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+                    out.println("<a class=\"list-group-item list-group-item-danger\" style=\"color:#000000;overflow: auto;\">");
 
                 }
                 out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + i + "</span><br>");
@@ -261,19 +261,19 @@
             out.println("</div></div></div></div>");
             HashMap<String, Boolean> userccc = Database.getInstance().getUserCCCs((String) request.getSession().getAttribute("user"));
             out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
-                    "PC de CCC que administras</div><div class=\"panel-body\" style=\"overflow: scroll;height: 70%;\"><div class=\"list-group\">");
+                    "PC de CCC que administras</div><div class=\"panel-body\" style=\"overflow: auto;height: 70%;\"><div class=\"list-group\">");
             for (String s : userccc.keySet())
                 if (userccc.get(s)) {
                     HashMap<Integer, HashMap<String, String>> cccPC = Database.getInstance().getcccPC(s);
                     for (int i : cccPC.keySet()) {
                         String estado = cccPC.get(i).get("Estado");
                         if (estado.equals(PCestados.evaluacion.toString())) {
-                            out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\" onclick=\"InfoPc('" + i + "')\">");
+                            out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000;overflow: auto;\" onclick=\"InfoPcEstado('" + i + "')\">");
                         } else if (estado.equals(PCestados.aceptado.toString())) {
-                            out.println("<a class=\"list-group-item list-group-item-success\" style=\"color:#000000\">");
+                            out.println("<a class=\"list-group-item list-group-item-success\" style=\"color:#000000;overflow: auto;\">");
 
                         } else if (estado.equals(PCestados.rechazado.toString())) {
-                            out.println("<a class=\"list-group-item list-group-item-danger\" style=\"color:#000000\">");
+                            out.println("<a class=\"list-group-item list-group-item-danger\" style=\"color:#000000;overflow: auto;\">");
 
                         }
                         out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + i + "</span><br>");
@@ -312,7 +312,7 @@
             HashMap<String, String> info2 = Database.getInstance().getPC(id);
             out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
                     "Informacion de la PC</div><div class=\"panel-body\"><div class=\"list-group\">");
-            out.println("<a href=\"#\" class=\"list-group-item list-group-item-info\" style=\"color:#000000\">");
+            out.println("<a class=\"list-group-item list-group-item-info\" style=\"color:#000000;overflow: auto;\">");
             out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + id + "</span><br>");
             for (String st : info2.keySet()) {
                 out.println("<b>" + st + ": </b>" + info2.get(st) + "<br>");
@@ -333,7 +333,6 @@
             out.println("<button type=\"button\" class=\"btn btn-default\" onclick=\"modificarEstadoPc('" + id +
                     "')\">Cambiar Estado</button>");
 
-
             out.println("&&&");
 
             break;
@@ -342,7 +341,59 @@
             String id2 = request.getParameter("id");
             PCestados estado = PCestados.valueOf(request.getParameter("estado"));
             System.out.println(id2 + ": " + estado);
-            Database.getInstance().modifyPC(Integer.valueOf(id2), estado);
+            if (Database.getInstance().modifyPCEstado(Integer.valueOf(id2), estado))
+                out.println("&&&OK&&&");
+            else
+                out.println("&&&NOTOK&&&");
             break;
+        case PCINFO2:
+            out.println("&&&");
+            String id3 = request.getParameter("id");
+
+            HashMap<String, String> info3 = Database.getInstance().getPC(id3);
+            out.println("<div class=\"col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\">" +
+                    "Informacion de la PC</div><div class=\"panel-body\"><div class=\"list-group\">");
+            out.println("<a class=\"list-group-item list-group-item-info\" style=\"color:#000000;overflow: auto;\">");
+            out.println("<b>Id: </b><span class=\"badge\" style=\"float: initial;\">" + id3 + "</span><br>");
+            for (String st : info3.keySet()) {
+                out.println("<b>" + st + ": </b>" + info3.get(st) + "<br>");
+            }
+            out.println(" </a>");
+            out.println("</div></div></div></div>");
+
+
+            String o = "<div class=\"col-md-6\"><form name=\"petmodif\" action=\"#\" method=\"post\" onsubmit=\"return ModifyPC(this,'" + id3 + "')\">" +
+                    "<div class=\"panel panel-success\"><div class=\"panel-heading\"><h3 class=\"panel-title\">" +
+                    "Modificar PC</h3></div><div class=\"panel-body\"><div class=\"input-group\" style=\"padding-top: 1%\">" +
+                    "<span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-pencil\"></span></span>" +
+                    "<textarea type=\"text\" id=\"desc\" name=\"desc\" class=\"form-control\" " +
+                    "placeholder=\"Descripcion breve (Max 500 caracteres)\" value=\"\" maxlength=\"500\">" +
+                    "</textarea></div><div class=\"input-group\" style=\"padding-top: 1%\"><span class=\"input-group-addon\">" +
+                    "<span class=\"glyphicon glyphicon-pencil\"></span></span><textarea type=\"text\" id=\"motivo\" " +
+                    "name=\"motivo\" class=\"form-control\" placeholder=\"Motivo de la Peticion de cambio\" " +
+                    "value=\"\" maxlength=\"2000\"></textarea></div><div style=\"padding-top: 2%\">" +
+                    "<input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"Modify\">\n" +
+                    "</div></div></div></form></div>";
+
+            out.println(o);
+
+
+            out.println("&&&");
+
+            break;
+
+        case MODIFYPC:
+            String id4 = request.getParameter("id");
+            String descrpc = request.getParameter("descr");
+            String motivopc = request.getParameter("mot");
+            System.out.println("id: " + id4 + " Descrip: " + descrpc + " Motivo: " + motivopc);
+
+            if ((!descrpc.equals("") || !motivopc.equals("")) && Database.getInstance().modifyPC(Integer.valueOf(id4), motivopc, descrpc))
+                out.println("&&&OK&&&");
+            else
+                out.println("&&&NOTOK&&&");
+
+            break;
+
     }
 %>

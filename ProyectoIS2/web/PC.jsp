@@ -75,6 +75,12 @@
                 <span class="sr-only">Error:</span>
                 <strong>Error at create PC.</strong> Please try again later.
             </div>
+
+            <div id="errormodifypc" class="alert alert-danger" role="alert" style="display: none;margin-top: 2%">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <strong>Error at modify PC.</strong> Please try again later.
+            </div>
             <p>
                 <button type="button" class="btn btn-default" onclick="verPC()"><span
                         class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

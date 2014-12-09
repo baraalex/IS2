@@ -41,7 +41,7 @@ function verPC() {
     });
 }
 
-function InfoPc(ID) {
+function InfoPcEstado(ID) {
     $.post("Functions.jsp", { action: "PCINFO", id: ID}, function (result) {
         $("#PCs").empty().html(result.split("&&&")[1]);
     });
@@ -58,11 +58,41 @@ function modificarEstadoPc(ID) {
         }
     }
     $.post("Functions.jsp", { action: "MODIFYPCESTADO", id: ID, estado: estate}, function (result) {
-        verPC();
+        if (result.split("&&&")[1] == "OK") {
+            verPC();
+        } else {
+            $("#errormodifypc").css("display", "block");
+        }
     });
+}
+
+function InfoPc(ID) {
+    $.post("Functions.jsp", { action: "PCINFO2", id: ID}, function (result) {
+        $("#PCs").empty().html(result.split("&&&")[1]);
+    });
+}
+
+
+function ModifyPC(form, Id) {
+
+    if (form.desc.value == "" && form.motivo.value == "") {
+        $("#errormodifypc").css("display", "block");
+        return false;
+    }
+    else {
+        $.post("Functions.jsp", { action: "MODIFYPC", descr: form.desc.value, mot: form.motivo.value, id: Id}, function (result) {
+            if (result.split("&&&")[1] == "OK") {
+                $("#errorcreatepc").css("display", "none");
+                form.submit();
+            }
+            else {
+                $("#errormodifypc").css("display", "block");
+                return false;
+            }
+        });
+    }
 }
 
 $(document).ready(function () {
     verPC();
 });
-
